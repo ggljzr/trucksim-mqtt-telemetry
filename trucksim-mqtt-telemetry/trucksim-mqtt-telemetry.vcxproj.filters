@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\sdk">
+      <UniqueIdentifier>{3ed770a1-a9f7-4a31-aae2-2eefeb74633b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sdk\common">
+      <UniqueIdentifier>{3e7371c9-4f53-47d4-b673-20f359d3b21a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sdk\amtrucks">
+      <UniqueIdentifier>{b40e2812-d732-4788-8b26-8b0a2e262e99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sdk\eurotrucks2">
+      <UniqueIdentifier>{46ea17fc-c2cd-4b63-b39c-d189f3dd2945}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -20,6 +32,66 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\scssdk_input_event.h">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\scssdk.h">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\scssdk_input.h">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\scssdk_input_device.h">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\scssdk_telemetry.h">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\scssdk_telemetry_channel.h">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\scssdk_telemetry_event.h">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\scssdk_value.h">
+      <Filter>Header Files\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\common\scssdk_telemetry_common_channels.h">
+      <Filter>Header Files\sdk\common</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\common\scssdk_telemetry_common_configs.h">
+      <Filter>Header Files\sdk\common</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\common\scssdk_telemetry_common_gameplay_events.h">
+      <Filter>Header Files\sdk\common</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\common\scssdk_telemetry_job_common_channels.h">
+      <Filter>Header Files\sdk\common</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\common\scssdk_telemetry_trailer_common_channels.h">
+      <Filter>Header Files\sdk\common</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\common\scssdk_telemetry_truck_common_channels.h">
+      <Filter>Header Files\sdk\common</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\amtrucks\scssdk_ats.h">
+      <Filter>Header Files\sdk\amtrucks</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\amtrucks\scssdk_input_ats.h">
+      <Filter>Header Files\sdk\amtrucks</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\amtrucks\scssdk_telemetry_ats.h">
+      <Filter>Header Files\sdk\amtrucks</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\eurotrucks2\scssdk_eut2.h">
+      <Filter>Header Files\sdk\eurotrucks2</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\eurotrucks2\scssdk_input_eut2.h">
+      <Filter>Header Files\sdk\eurotrucks2</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\eurotrucks2\scssdk_telemetry_eut2.h">
+      <Filter>Header Files\sdk\eurotrucks2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -29,5 +101,10 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="sdk\sdk_license.txt">
+      <Filter>Header Files\sdk</Filter>
+    </Text>
   </ItemGroup>
 </Project>

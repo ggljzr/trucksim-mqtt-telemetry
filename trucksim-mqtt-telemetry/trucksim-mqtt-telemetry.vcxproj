@@ -141,6 +141,26 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="sdk\amtrucks\scssdk_ats.h" />
+    <ClInclude Include="sdk\amtrucks\scssdk_input_ats.h" />
+    <ClInclude Include="sdk\amtrucks\scssdk_telemetry_ats.h" />
+    <ClInclude Include="sdk\common\scssdk_telemetry_common_channels.h" />
+    <ClInclude Include="sdk\common\scssdk_telemetry_common_configs.h" />
+    <ClInclude Include="sdk\common\scssdk_telemetry_common_gameplay_events.h" />
+    <ClInclude Include="sdk\common\scssdk_telemetry_job_common_channels.h" />
+    <ClInclude Include="sdk\common\scssdk_telemetry_trailer_common_channels.h" />
+    <ClInclude Include="sdk\common\scssdk_telemetry_truck_common_channels.h" />
+    <ClInclude Include="sdk\eurotrucks2\scssdk_eut2.h" />
+    <ClInclude Include="sdk\eurotrucks2\scssdk_input_eut2.h" />
+    <ClInclude Include="sdk\eurotrucks2\scssdk_telemetry_eut2.h" />
+    <ClInclude Include="sdk\scssdk.h" />
+    <ClInclude Include="sdk\scssdk_input.h" />
+    <ClInclude Include="sdk\scssdk_input_device.h" />
+    <ClInclude Include="sdk\scssdk_input_event.h" />
+    <ClInclude Include="sdk\scssdk_telemetry.h" />
+    <ClInclude Include="sdk\scssdk_telemetry_channel.h" />
+    <ClInclude Include="sdk\scssdk_telemetry_event.h" />
+    <ClInclude Include="sdk\scssdk_value.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -150,6 +170,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="sdk\sdk_license.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

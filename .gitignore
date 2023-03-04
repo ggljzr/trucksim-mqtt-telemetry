@@ -31,4 +31,9 @@
 *.out
 *.app
 
+x64
+*.pch
+*.iobj
+
+
 .vs
