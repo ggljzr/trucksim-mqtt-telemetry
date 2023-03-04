@@ -107,4 +107,9 @@
       <Filter>Header Files\sdk</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="trucksim-mqtt-telemetry.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
