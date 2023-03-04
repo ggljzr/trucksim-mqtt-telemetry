@@ -1,5 +1,7 @@
 # trucksim-mqtt-telemetry
 
+*Work in progress*
+
 ATS/ETS2 plugin for publishing game telemetry via MQTT protocol.
 
 ## Building DLL file
