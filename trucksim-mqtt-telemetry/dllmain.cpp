@@ -28,11 +28,6 @@
 #pragma warning(disable : 4996)
 
 /**
- * @brief Logging support.
- */
-FILE* log_file = NULL;
-
-/**
  * @brief Tracking of paused state of the game.
  */
 bool output_paused = true;
@@ -176,6 +171,17 @@ SCSAPI_VOID telemetry_store_s32(const scs_string_t name, const scs_u32_t index, 
 	*static_cast<int*>(context) = value->value_s32.value;
 }
 
+SCSAPI_VOID telemetry_on_gear_changed(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context) {
+	telemetry_store_s32(name, index, value, context);
+
+	if (game_log != NULL) {
+		char sbuffer[32];
+		snprintf(sbuffer, 32, "Gear changed: %d", value->value_s32.value);
+
+		game_log(SCS_LOG_TYPE_message, sbuffer);
+	}
+}
+
 /**
  * @brief Telemetry API initialization function.
  *
@@ -269,7 +275,7 @@ SCSAPI_RESULT scs_telemetry_init(const scs_u32_t version, const scs_telemetry_in
 	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_world_placement, SCS_U32_NIL, SCS_VALUE_TYPE_euler, SCS_TELEMETRY_CHANNEL_FLAG_no_value, telemetry_store_orientation, &telemetry);
 	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_speed, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_store_float, &telemetry.speed);
 	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_rpm, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_store_float, &telemetry.rpm);
-	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_gear, SCS_U32_NIL, SCS_VALUE_TYPE_s32, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_store_s32, &telemetry.gear);
+	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_gear, SCS_U32_NIL, SCS_VALUE_TYPE_s32, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_on_gear_changed, &telemetry.gear);
 
 	// Remember the function we will use for logging.
 
