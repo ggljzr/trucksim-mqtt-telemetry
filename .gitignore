@@ -35,5 +35,11 @@ x64
 *.pch
 *.iobj
 
+# python stuff
+__pycache__
+*.pyc
+.python-version
 
+# other
 .vs
+.vscode
