@@ -348,6 +348,8 @@ SCSAPI_VOID scs_telemetry_shutdown(void)
 	// so there is no need to do that manually.
 
 	game_log = NULL;
+	auto msg = mqtt::make_message(TOPIC, "Goodbye from ATS!");
+	mqtt_client.publish(msg);
 	mqtt_client.disconnect();
 }
 
