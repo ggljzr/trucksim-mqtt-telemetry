@@ -6,7 +6,7 @@ ATS/ETS2 plugin for publishing game telemetry via MQTT protocol.
 
 ## Requirements
 
-Plugins uses Eclipse Paho MQTT [library](https://github.com/eclipse/paho.mqtt.cpp), which can be installed with
+Plugin uses Eclipse Paho MQTT [library](https://github.com/eclipse/paho.mqtt.cpp), which can be installed with
 [VCPKG](https://vcpkg.io/en/index.html):
 
 ```
