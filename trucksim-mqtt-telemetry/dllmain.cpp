@@ -212,9 +212,11 @@ SCSAPI_VOID telemetry_on_gear_changed(const scs_string_t name, const scs_u32_t i
 	snprintf(sbuffer, 32, "Gear changed: %d", value->value_s32.value);
 
 	if (game_log != NULL) {
-
 		game_log(SCS_LOG_TYPE_message, sbuffer);
 	}
+
+	auto msg = mqtt::make_message(TOPIC, sbuffer);
+	mqtt_client.publish(msg);
 }
 
 /**
@@ -346,6 +348,7 @@ SCSAPI_VOID scs_telemetry_shutdown(void)
 	// so there is no need to do that manually.
 
 	game_log = NULL;
+	mqtt_client.disconnect();
 }
 
 // Cleanup
