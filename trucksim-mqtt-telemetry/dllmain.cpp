@@ -27,7 +27,12 @@
 
 #define UNUSED(x)
 
-#pragma warning(disable : 4996)
+const std::string SERVER_ADDRESS{ "tcp://127.0.0.1:1883" };
+const std::string CLIENT_ID{ "trucksim-publisher" };
+const std::string TOPIC{ "trucksim" };
+const std::string PERSIST_FILE{ "C:/Users/gogol/source/persist" };
+
+mqtt::client mqtt_client(SERVER_ADDRESS, CLIENT_ID, PERSIST_FILE);
 
 /**
  * @brief Tracking of paused state of the game.
@@ -64,6 +69,30 @@ struct telemetry_state_t
  * @brief Function writting message to the game internal log.
  */
 scs_log_t game_log = NULL;
+
+/**
+ * @brief Function that connects MQTT client to the broker.
+ */
+SCSAPI_RESULT connect_client() {
+	mqtt::connect_options conn_opts;
+	conn_opts.set_keep_alive_interval(20);
+	conn_opts.set_clean_session(true);
+
+	try {
+		mqtt_client.connect(conn_opts);
+	}
+	catch (const mqtt::exception& exc) {
+
+		if (game_log != NULL) {
+			game_log(SCS_LOG_TYPE_message, "MQTT Connection error");
+			game_log(SCS_LOG_TYPE_message, exc.what());
+		}
+
+		return SCS_RESULT_generic_error;
+	}
+
+	return SCS_RESULT_ok;
+}
 
 // Handling of individual events.
 
@@ -176,12 +205,16 @@ SCSAPI_VOID telemetry_store_s32(const scs_string_t name, const scs_u32_t index, 
 SCSAPI_VOID telemetry_on_gear_changed(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context) {
 	telemetry_store_s32(name, index, value, context);
 
+	char sbuffer[32];
+	snprintf(sbuffer, 32, "Gear changed: %d", value->value_s32.value);
+
 	if (game_log != NULL) {
-		char sbuffer[32];
-		snprintf(sbuffer, 32, "Gear changed: %d", value->value_s32.value);
 
 		game_log(SCS_LOG_TYPE_message, sbuffer);
 	}
+
+	auto msg = mqtt::make_message(TOPIC, sbuffer);
+	mqtt_client.publish(msg);
 }
 
 /**
@@ -241,6 +274,18 @@ SCSAPI_RESULT scs_telemetry_init(const scs_u32_t version, const scs_telemetry_in
 		// log_line("WARNING: Unsupported game, some features or values might behave incorrectly");
 	}
 
+	// Remember the function we will use for logging.
+
+	game_log = version_params->common.log;
+	game_log(SCS_LOG_TYPE_message, "Initializing MQTT plugin...");
+
+	// Connect to MQTT broker
+	SCSAPI_RESULT result = connect_client();
+	if (result != SCS_RESULT_ok) {
+		return result;
+	}
+
+
 	// Register for events. Note that failure to register those basic events
 	// likely indicates invalid usage of the api or some critical problem. As the
 	// example requires all of them, we can not continue if the registration fails.
@@ -279,11 +324,6 @@ SCSAPI_RESULT scs_telemetry_init(const scs_u32_t version, const scs_telemetry_in
 	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_rpm, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_store_float, &telemetry.rpm);
 	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_gear, SCS_U32_NIL, SCS_VALUE_TYPE_s32, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_on_gear_changed, &telemetry.gear);
 
-	// Remember the function we will use for logging.
-
-	game_log = version_params->common.log;
-	game_log(SCS_LOG_TYPE_message, "Initializing MQTT plugin...");
-
 	// Set the structure with defaults.
 
 	memset(&telemetry, 0, sizeof(telemetry));
@@ -306,6 +346,7 @@ SCSAPI_VOID scs_telemetry_shutdown(void)
 	// so there is no need to do that manually.
 
 	game_log = NULL;
+	mqtt_client.disconnect();
 }
 
 // Cleanup
