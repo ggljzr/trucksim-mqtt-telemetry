@@ -143,12 +143,10 @@
       <ModuleDefinitionFile>trucksim-mqtt-telemetry.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy.exe /y $(OutDir)$(TargetName)$(TargetExt) "C:\Program Files (x86)\Steam\steamapps\common\American Truck Simulator\bin\win_x64\plugins"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>
-      </Message>
+      <Message>Copy the release build DLL into ATS plugin folder</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
