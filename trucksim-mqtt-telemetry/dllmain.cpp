@@ -2,7 +2,6 @@
 #include "pch.h"
 
 // Windows stuff.
-
 #ifdef _WIN32
 #  define WINVER 0x0500
 #  define _WIN32_WINNT 0x0500
@@ -15,13 +14,16 @@
 #include <stdarg.h>
 #include <string.h>
 
-// SDK
+// MQTT Lib
+#include "MQTTClient.h"
 
+// SDK
 #include "sdk/scssdk_telemetry.h"
 #include "sdk/eurotrucks2/scssdk_eut2.h"
 #include "sdk/eurotrucks2/scssdk_telemetry_eut2.h"
 #include "sdk/amtrucks/scssdk_ats.h"
 #include "sdk/amtrucks/scssdk_telemetry_ats.h"
+
 
 #define UNUSED(x)
 
