@@ -15,7 +15,7 @@
 #include <string.h>
 
 // MQTT Lib
-#include "MQTTClient.h"
+#include <mqtt/client.h>
 
 // SDK
 #include "sdk/scssdk_telemetry.h"

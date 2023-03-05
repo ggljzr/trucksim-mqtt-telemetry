@@ -19,3 +19,5 @@ Note that plugin DLL file is created in platform folder (``x64`` or ``x86``) wit
 
 Project release configuration has build event that copies the resulting DLL file directly into ATS plugin folder (``C:\Program Files (x86)\Steam\steamapps\common\American Truck Simulator\bin\win_x64\plugins``).
 Make sure that this folder exists or remove this build event in project properties.
+
+Both debug and release configurations also define ``NOMINMAX`` flag for preprocessor. This is due to a [bug](https://github.com/eclipse/paho.mqtt.cpp/issues/226) in Paho MQTT library on Windows.
