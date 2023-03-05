@@ -17,7 +17,10 @@ Plugins uses Eclipse Paho MQTT [library](https://github.com/eclipse/paho.mqtt.cp
 
 Note that plugin DLL file is created in platform folder (``x64`` or ``x86``) within *solution* folder, not the ``trucksim-mqtt-telemetry`` subfolder.
 
-Project release configuration has build event that copies the resulting DLL file directly into ATS plugin folder (``C:\Program Files (x86)\Steam\steamapps\common\American Truck Simulator\bin\win_x64\plugins``).
-Make sure that this folder exists or remove this build event in project properties.
+Project release configuration defines a build event that installs the plugin into ATS. This event copies all dependencies into 
+``C:\Program Files (x86)\Steam\steamapps\common\American Truck Simulator\bin\win_x64`` folder (to make sure they are correctly loaded)
+and then copies plugin DLL into ``plugins`` subfolder. These paths has to exist for project to build properly.
+
+If you dont intend to use ATS for plugin developement, you should modify or remove this build event.
 
 Both debug and release configurations also define ``NOMINMAX`` flag for preprocessor. This is due to a [bug](https://github.com/eclipse/paho.mqtt.cpp/issues/226) in Paho MQTT library on Windows.
