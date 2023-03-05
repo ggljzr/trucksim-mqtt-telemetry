@@ -1,6 +1,6 @@
 # trucksim-mqtt-telemetry
 
-*Work in progress*
+*Work in progress. Current state: basic proof of concept. I managed to get the MQTT client running from within the plugin.*
 
 ATS/ETS2 plugin for publishing game telemetry via MQTT protocol.
 
@@ -19,7 +19,7 @@ Note that plugin DLL file is created in platform folder (``x64`` or ``x86``) wit
 
 Project release configuration defines a build event that installs the plugin into ATS. This event copies all dependencies into 
 ``C:\Program Files (x86)\Steam\steamapps\common\American Truck Simulator\bin\win_x64`` folder (to make sure they are correctly loaded)
-and then copies plugin DLL into ``plugins`` subfolder. These paths has to exist for project to build properly.
+and then copies plugin DLL into ``plugins`` subfolder. These paths have to exist for project to build properly.
 
 If you dont intend to use ATS for plugin developement, you should modify or remove this build event.
 
