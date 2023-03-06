@@ -1,7 +1,6 @@
 #pragma once
 
 #include <mqtt/client.h>
-#include "sdk/scssdk.h"
 #include "sdk/scssdk_value.h"
 
 namespace trucksim_mqtt {
@@ -21,6 +20,6 @@ namespace trucksim_mqtt {
 		/// Event handler for changing gear.
 		/// </summary>
 		/// <param name="value">New gear value.</param>
-		SCSAPI_VOID on_gear_changed(const scs_value_t* const value);
+		void on_gear_changed(const scs_value_t* const value);
 	};
 }

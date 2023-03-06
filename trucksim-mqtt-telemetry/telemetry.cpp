@@ -1,7 +1,6 @@
 #include "pch.h"
 
 #include <mqtt/client.h>
-#include "sdk/scssdk.h"
 #include "sdk/scssdk_value.h"
 
 #include "telemetry.h"
@@ -15,7 +14,7 @@ namespace trucksim_mqtt {
 		client->publish(msg);
 	}
 
-	SCSAPI_VOID Telemetry::on_gear_changed(const scs_value_t* const value)
+	void Telemetry::on_gear_changed(const scs_value_t* const value)
 	{
 		char sbuffer[32];
 		snprintf(sbuffer, 32, "Gear changed: %d", value->value_s32.value);
