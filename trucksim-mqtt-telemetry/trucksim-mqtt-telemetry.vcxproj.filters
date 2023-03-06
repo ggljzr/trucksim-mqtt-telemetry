@@ -93,6 +93,9 @@
     <ClInclude Include="sdk\eurotrucks2\scssdk_telemetry_eut2.h">
       <Filter>Header Files\sdk\eurotrucks2</Filter>
     </ClInclude>
+    <ClInclude Include="topics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">

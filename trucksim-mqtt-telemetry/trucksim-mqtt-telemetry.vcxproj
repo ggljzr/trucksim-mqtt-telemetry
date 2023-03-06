@@ -133,6 +133,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -178,6 +179,7 @@ xcopy.exe /y $(OutDir)paho-mqttpp3.dll "C:\Program Files (x86)\Steam\steamapps\c
     <ClInclude Include="sdk\scssdk_telemetry_channel.h" />
     <ClInclude Include="sdk\scssdk_telemetry_event.h" />
     <ClInclude Include="sdk\scssdk_value.h" />
+    <ClInclude Include="topics.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />

@@ -24,12 +24,13 @@
 #include "sdk/amtrucks/scssdk_ats.h"
 #include "sdk/amtrucks/scssdk_telemetry_ats.h"
 
+// Local
+#include "topics.h"
 
 #define UNUSED(x)
 
 const std::string SERVER_ADDRESS{ "tcp://127.0.0.1:1883" };
 const std::string CLIENT_ID{ "trucksim-publisher" };
-const std::string TOPIC{ "trucksim" };
 const std::string PERSIST_FILE{ "C:/Users/gogol/source/persist" };
 
 mqtt::client mqtt_client(SERVER_ADDRESS, CLIENT_ID, PERSIST_FILE);
@@ -91,7 +92,7 @@ SCSAPI_RESULT connect_client() {
 		return SCS_RESULT_generic_error;
 	}
 
-	auto msg = mqtt::make_message(TOPIC, "Hello from ATS!");
+	auto msg = mqtt::make_message(LOG_TOPIC, "Hello from ATS!");
 	mqtt_client.publish(msg);
 
 	return SCS_RESULT_ok;
@@ -215,7 +216,7 @@ SCSAPI_VOID telemetry_on_gear_changed(const scs_string_t name, const scs_u32_t i
 		game_log(SCS_LOG_TYPE_message, sbuffer);
 	}
 
-	auto msg = mqtt::make_message(TOPIC, sbuffer);
+	auto msg = mqtt::make_message(LOG_TOPIC, sbuffer);
 	mqtt_client.publish(msg);
 }
 
@@ -348,7 +349,7 @@ SCSAPI_VOID scs_telemetry_shutdown(void)
 	// so there is no need to do that manually.
 
 	game_log = NULL;
-	auto msg = mqtt::make_message(TOPIC, "Goodbye from ATS!");
+	auto msg = mqtt::make_message(LOG_TOPIC, "Goodbye from ATS!");
 	mqtt_client.publish(msg);
 	mqtt_client.disconnect();
 }
