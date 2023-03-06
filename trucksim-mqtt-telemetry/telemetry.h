@@ -11,6 +11,16 @@ namespace trucksim_mqtt {
 
 	public:
 		Telemetry(mqtt::client* client);
+
+		/// <summary>
+		/// Method for sending log messages to LOG topic.
+		/// </summary>
+		void log(const char* msg_text);
+
+		/// <summary>
+		/// Event handler for changing gear.
+		/// </summary>
+		/// <param name="value">New gear value.</param>
 		SCSAPI_VOID on_gear_changed(const scs_value_t* const value);
 	};
 }

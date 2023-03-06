@@ -175,6 +175,8 @@ namespace trucksim_mqtt {
 			return result;
 		}
 
+		// We are connected, say hello
+		telemetry.log("Hello from ATS!");
 
 		// Register for events. Note that failure to register those basic events
 		// likely indicates invalid usage of the api or some critical problem. As the
@@ -225,8 +227,7 @@ namespace trucksim_mqtt {
 		// so there is no need to do that manually.
 
 		game_log = NULL;
-		auto msg = mqtt::make_message(LOG_TOPIC, "Goodbye from ATS!");
-		mqtt_client.publish(msg);
+		telemetry.log("Goodbye from ATS!");
 		mqtt_client.disconnect();
 	}
 

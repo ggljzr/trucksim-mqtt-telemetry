@@ -25,9 +25,6 @@ namespace trucksim_mqtt {
 			return SCS_RESULT_generic_error;
 		}
 
-		auto msg = mqtt::make_message(LOG_TOPIC, "Hello from ATS!");
-		client->publish(msg);
-
 		return SCS_RESULT_ok;
 	}
 }
