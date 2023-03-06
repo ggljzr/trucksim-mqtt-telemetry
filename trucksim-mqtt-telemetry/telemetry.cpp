@@ -18,8 +18,14 @@ namespace trucksim_mqtt {
 	}
 
 	void Telemetry::on_gameplay_event(const scs_telemetry_gameplay_event_t* const event) {
-		char sbuffer[64];
-		snprintf(sbuffer, 64, "Recieved event with ID: %s", event->id);
+		char sbuffer[128];
+		snprintf(sbuffer, 128, "Recieved gameplay event with ID: %s", event->id);
+		log(sbuffer);
+	}
+
+	void Telemetry::on_configuration_event(const scs_telemetry_configuration_t* const event) {
+		char sbuffer[128];
+		snprintf(sbuffer, 128, "Recieved config event with ID: %s", event->id);
 		log(sbuffer);
 	}
 
