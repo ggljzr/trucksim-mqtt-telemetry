@@ -27,6 +27,7 @@
 // Local
 #include "topics.h"
 #include "config.h"
+#include "client.h"
 
 #define UNUSED(x)
 
@@ -47,34 +48,6 @@ namespace trucksim_mqtt {
 	/// Function writting message to the game internal log. Initialized in scs_telemetry_init.
 	/// </summary>
 	scs_log_t game_log = NULL;
-
-	/// <summary>
-	/// Function that connects MQTT client to the broker.
-	/// </summary>
-	/// <returns>SCS_RESULT_ok if client successfully connects, SCS_RESULT_generic_error otherwise.</returns>
-	SCSAPI_RESULT connect_client() {
-		mqtt::connect_options conn_opts;
-		conn_opts.set_keep_alive_interval(20);
-		conn_opts.set_clean_session(true);
-
-		try {
-			mqtt_client.connect(conn_opts);
-		}
-		catch (const mqtt::exception& exc) {
-
-			if (game_log != NULL) {
-				game_log(SCS_LOG_TYPE_message, "MQTT Connection error");
-				game_log(SCS_LOG_TYPE_message, exc.what());
-			}
-
-			return SCS_RESULT_generic_error;
-		}
-
-		auto msg = mqtt::make_message(LOG_TOPIC, "Hello from ATS!");
-		mqtt_client.publish(msg);
-
-		return SCS_RESULT_ok;
-	}
 
 	// Handling of individual events.
 
@@ -221,7 +194,7 @@ namespace trucksim_mqtt {
 		game_log(SCS_LOG_TYPE_message, "Initializing MQTT plugin...");
 
 		// Connect to MQTT broker
-		SCSAPI_RESULT result = connect_client();
+		SCSAPI_RESULT result = connect_client(&mqtt_client, game_log);
 		if (result != SCS_RESULT_ok) {
 			return result;
 		}
