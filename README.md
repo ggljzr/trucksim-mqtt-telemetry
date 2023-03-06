@@ -1,8 +1,13 @@
 # trucksim-mqtt-telemetry
 
-*Work in progress. Current state: basic proof of concept. I managed to get the MQTT client running from within the plugin.*
+*Work in progress*
 
 ATS/ETS2 plugin for publishing game telemetry via MQTT protocol.
+
+## Current state
+
+Basic proof of concept. I managed to get the MQTT client running from within the plugin. It seems that MQTT
+is fast enough to publish RPM values directly from the channel handler.
 
 ## Requirements
 
