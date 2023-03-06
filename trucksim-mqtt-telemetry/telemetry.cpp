@@ -35,4 +35,10 @@ namespace trucksim_mqtt {
 		snprintf(sbuffer, 32, "Gear changed: %d", value->value_s32.value);
 		log(sbuffer);
 	};
+
+	void Telemetry::on_rpm_changed(const scs_value_t* const value) {
+		char sbuffer[64];
+		snprintf(sbuffer, 64, "RPM: %f", value->value_float.value);
+		log(sbuffer);
+	}
 }

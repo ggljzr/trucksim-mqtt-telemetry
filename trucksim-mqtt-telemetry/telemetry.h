@@ -33,5 +33,7 @@ namespace trucksim_mqtt {
 		/// </summary>
 		/// <param name="value">New gear value.</param>
 		void on_gear_changed(const scs_value_t* const value);
+
+		void on_rpm_changed(const scs_value_t* const value);
 	};
 }
