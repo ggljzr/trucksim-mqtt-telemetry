@@ -8,9 +8,7 @@
 #  include <windows.h>
 #endif
 
-#include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 #include <stdarg.h>
 #include <string.h>
 
@@ -100,6 +98,7 @@ namespace trucksim_mqtt {
 	SCSAPI_VOID telemetry_gameplay_event(const scs_event_t event, const void* const event_info, const scs_context_t UNUSED(context))
 	{
 		const struct scs_telemetry_gameplay_event_t* const info = static_cast<const scs_telemetry_gameplay_event_t*>(event_info);
+		telemetry.on_gameplay_event(info);
 	}
 
 	// Handling of individual channels.

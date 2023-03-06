@@ -2,6 +2,7 @@
 
 #include <mqtt/client.h>
 #include "sdk/scssdk_value.h"
+#include "sdk/scssdk_telemetry_event.h"
 
 namespace trucksim_mqtt {
 	class Telemetry {
@@ -15,6 +16,11 @@ namespace trucksim_mqtt {
 		/// Method for sending log messages to LOG topic.
 		/// </summary>
 		void log(const char* msg_text);
+
+		/// <summary>
+		/// Event handler for gameplay event.
+		/// </summary>
+		void on_gameplay_event(const scs_telemetry_gameplay_event_t* const event);
 
 		/// <summary>
 		/// Event handler for changing gear.
