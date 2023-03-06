@@ -28,11 +28,13 @@
 #include "topics.h"
 #include "config.h"
 #include "client.h"
+#include "telemetry.h"
 
 #define UNUSED(x)
 
 namespace trucksim_mqtt {
 	mqtt::client mqtt_client(SERVER_ADDRESS, CLIENT_ID, PERSIST_FILE);
+	Telemetry telemetry(&mqtt_client);
 
 	/// <summary>
 	/// Tracking of paused state of the game.
@@ -92,45 +94,19 @@ namespace trucksim_mqtt {
 
 	SCSAPI_VOID telemetry_configuration(const scs_event_t event, const void* const event_info, const scs_context_t UNUSED(context))
 	{
-		// Here we just print the configuration info.
-
 		const struct scs_telemetry_configuration_t* const info = static_cast<const scs_telemetry_configuration_t*>(event_info);
 	}
 
 	SCSAPI_VOID telemetry_gameplay_event(const scs_event_t event, const void* const event_info, const scs_context_t UNUSED(context))
 	{
-		// Here we just print the event info.
-
 		const struct scs_telemetry_gameplay_event_t* const info = static_cast<const scs_telemetry_gameplay_event_t*>(event_info);
 	}
 
 	// Handling of individual channels.
 
-	SCSAPI_VOID telemetry_store_orientation(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
+	SCSAPI_VOID telemetry_on_gear_changed(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t UNUSED(context))
 	{
-		assert(context);
-
-		// This callback was registered with the SCS_TELEMETRY_CHANNEL_FLAG_no_value flag
-		// so it is called even when the value is not available.
-
-		if (!value) {
-			return;
-		}
-
-		assert(value);
-		assert(value->type == SCS_VALUE_TYPE_euler);
-	}
-
-	SCSAPI_VOID telemetry_on_gear_changed(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context) {
-		char sbuffer[32];
-		snprintf(sbuffer, 32, "Gear changed: %d", value->value_s32.value);
-
-		if (game_log != NULL) {
-			game_log(SCS_LOG_TYPE_message, sbuffer);
-		}
-
-		auto msg = mqtt::make_message(LOG_TOPIC, sbuffer);
-		mqtt_client.publish(msg);
+		telemetry.on_gear_changed(value);
 	}
 
 	/// <summary>
