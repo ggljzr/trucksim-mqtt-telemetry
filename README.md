@@ -24,3 +24,7 @@ and then copies plugin DLL into ``plugins`` subfolder. These paths have to exist
 If you dont intend to use ATS for plugin developement, you should modify or remove this build event.
 
 Both debug and release configurations also define ``NOMINMAX`` flag for preprocessor. This is due to a [bug](https://github.com/eclipse/paho.mqtt.cpp/issues/226) in Paho MQTT library on Windows.
+
+## Links
+
+* [RenCloud](https://github.com/RenCloud/scs-sdk-plugin) telemetry plugin.
