@@ -35,45 +35,25 @@ const std::string PERSIST_FILE{ "C:/Users/gogol/source/persist" };
 
 mqtt::client mqtt_client(SERVER_ADDRESS, CLIENT_ID, PERSIST_FILE);
 
-/**
- * @brief Tracking of paused state of the game.
- */
+/// <summary>
+/// Tracking of paused state of the game.
+/// </summary>
 bool output_paused = true;
 
-/**
- * @brief Last timestamp we received.
- */
+/// <summary>
+/// Last timestamp we received.
+/// </summary>
 scs_timestamp_t last_timestamp = static_cast<scs_timestamp_t>(-1);
 
-/**
- * @brief Combined telemetry data.
- */
-struct telemetry_state_t
-{
-	scs_timestamp_t timestamp;
-	scs_timestamp_t raw_rendering_timestamp;
-	scs_timestamp_t raw_simulation_timestamp;
-	scs_timestamp_t raw_paused_simulation_timestamp;
-
-	bool	orientation_available;
-	float	heading;
-	float	pitch;
-	float	roll;
-
-	float	speed;
-	float	rpm;
-	int	gear;
-
-} telemetry;
-
-/**
- * @brief Function writting message to the game internal log.
- */
+/// <summary>
+/// Function writting message to the game internal log. Initialized in scs_telemetry_init.
+/// </summary>
 scs_log_t game_log = NULL;
 
-/**
- * @brief Function that connects MQTT client to the broker.
- */
+/// <summary>
+/// Function that connects MQTT client to the broker.
+/// </summary>
+/// <returns>SCS_RESULT_ok if client successfully connects, SCS_RESULT_generic_error otherwise.</returns>
 SCSAPI_RESULT connect_client() {
 	mqtt::connect_options conn_opts;
 	conn_opts.set_keep_alive_interval(20);
@@ -122,15 +102,7 @@ SCSAPI_VOID telemetry_frame_start(const scs_event_t UNUSED(event), const void* c
 	}
 
 	// Advance the timestamp by delta since last frame.
-
-	telemetry.timestamp += (info->paused_simulation_time - last_timestamp);
 	last_timestamp = info->paused_simulation_time;
-
-	// The raw values.
-
-	telemetry.raw_rendering_timestamp = info->render_time;
-	telemetry.raw_simulation_timestamp = info->simulation_time;
-	telemetry.raw_paused_simulation_timestamp = info->paused_simulation_time;
 }
 
 SCSAPI_VOID telemetry_frame_end(const scs_event_t UNUSED(event), const void* const UNUSED(event_info), const scs_context_t UNUSED(context))
@@ -166,49 +138,19 @@ SCSAPI_VOID telemetry_gameplay_event(const scs_event_t event, const void* const 
 SCSAPI_VOID telemetry_store_orientation(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
 {
 	assert(context);
-	telemetry_state_t* const state = static_cast<telemetry_state_t*>(context);
 
 	// This callback was registered with the SCS_TELEMETRY_CHANNEL_FLAG_no_value flag
 	// so it is called even when the value is not available.
 
 	if (!value) {
-		state->orientation_available = false;
 		return;
 	}
 
 	assert(value);
 	assert(value->type == SCS_VALUE_TYPE_euler);
-	state->orientation_available = true;
-	state->heading = value->value_euler.heading * 360.0f;
-	state->pitch = value->value_euler.pitch * 360.0f;
-	state->roll = value->value_euler.roll * 360.0f;
-}
-
-SCSAPI_VOID telemetry_store_float(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
-{
-	// The SCS_TELEMETRY_CHANNEL_FLAG_no_value flag was not provided during registration
-	// so this callback is only called when a valid value is available.
-
-	assert(value);
-	assert(value->type == SCS_VALUE_TYPE_float);
-	assert(context);
-	*static_cast<float*>(context) = value->value_float.value;
-}
-
-SCSAPI_VOID telemetry_store_s32(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
-{
-	// The SCS_TELEMETRY_CHANNEL_FLAG_no_value flag was not provided during registration
-	// so this callback is only called when a valid value is available.
-
-	assert(value);
-	assert(value->type == SCS_VALUE_TYPE_s32);
-	assert(context);
-	*static_cast<int*>(context) = value->value_s32.value;
 }
 
 SCSAPI_VOID telemetry_on_gear_changed(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context) {
-	telemetry_store_s32(name, index, value, context);
-
 	char sbuffer[32];
 	snprintf(sbuffer, 32, "Gear changed: %d", value->value_s32.value);
 
@@ -220,11 +162,9 @@ SCSAPI_VOID telemetry_on_gear_changed(const scs_string_t name, const scs_u32_t i
 	mqtt_client.publish(msg);
 }
 
-/**
- * @brief Telemetry API initialization function.
- *
- * See scssdk_telemetry.h
- */
+/// <summary>
+///  Telemetry API initialization function. See scssdk_telemetry.h.
+/// </summary>
 SCSAPI_RESULT scs_telemetry_init(const scs_u32_t version, const scs_telemetry_init_params_t* const params)
 {
 	// We currently support only one version.
@@ -310,39 +250,28 @@ SCSAPI_RESULT scs_telemetry_init(const scs_u32_t version, const scs_telemetry_in
 
 	// Register for the configuration info. As this example only prints the retrieved
 	// data, it can operate even if that fails.
-
 	version_params->register_for_event(SCS_TELEMETRY_EVENT_configuration, telemetry_configuration, NULL);
 
 	// Register for gameplay events.
-
 	version_params->register_for_event(SCS_TELEMETRY_EVENT_gameplay, telemetry_gameplay_event, NULL);
 
 	// Register for channels. The channel might be missing if the game does not support
 	// it (SCS_RESULT_not_found) or if does not support the requested type
 	// (SCS_RESULT_unsupported_type). For purpose of this example we ignore the failues
 	// so the unsupported channels will remain at theirs default value.
-
-	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_world_placement, SCS_U32_NIL, SCS_VALUE_TYPE_euler, SCS_TELEMETRY_CHANNEL_FLAG_no_value, telemetry_store_orientation, &telemetry);
-	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_speed, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_store_float, &telemetry.speed);
-	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_rpm, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_store_float, &telemetry.rpm);
-	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_gear, SCS_U32_NIL, SCS_VALUE_TYPE_s32, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_on_gear_changed, &telemetry.gear);
+	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_gear, SCS_U32_NIL, SCS_VALUE_TYPE_s32, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_on_gear_changed, NULL);
 
 	// Set the structure with defaults.
-
-	memset(&telemetry, 0, sizeof(telemetry));
 	last_timestamp = static_cast<scs_timestamp_t>(-1);
 
 	// Initially the game is paused.
-
 	output_paused = true;
 	return SCS_RESULT_ok;
 }
 
-/**
- * @brief Telemetry API deinitialization function.
- *
- * See scssdk_telemetry.h
- */
+/// <summary>
+/// Telemetry API deinitialization function. See scssdk_telemetry.h.
+/// </summary>
 SCSAPI_VOID scs_telemetry_shutdown(void)
 {
 	// Any cleanup needed. The registrations will be removed automatically
