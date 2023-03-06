@@ -26,14 +26,11 @@
 
 // Local
 #include "topics.h"
+#include "config.h"
 
 #define UNUSED(x)
 
 namespace trucksim_mqtt {
-	const std::string SERVER_ADDRESS{ "tcp://127.0.0.1:1883" };
-	const std::string CLIENT_ID{ "trucksim-publisher" };
-	const std::string PERSIST_FILE{ "C:/Users/gogol/source/persist" };
-
 	mqtt::client mqtt_client(SERVER_ADDRESS, CLIENT_ID, PERSIST_FILE);
 
 	/// <summary>
