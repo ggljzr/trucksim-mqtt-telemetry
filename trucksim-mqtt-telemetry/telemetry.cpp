@@ -13,6 +13,47 @@
 namespace trucksim_mqtt {
 	Telemetry::Telemetry(mqtt::client* client, Logger* logger) : client(client), logger(logger) {}
 
+	void Telemetry::version_check(const scs_telemetry_init_params_v101_t* const version_params) const
+	{
+		logger->info("Checking game version...");
+		// Check application version. Note that this example uses fairly basic channels which are likely to be supported
+		// by any future SCS trucking game however more advanced application might want to at least warn the user if there
+		// is game or version they do not support.
+		if (strcmp(version_params->common.game_id, SCS_GAME_ID_EUT2) == 0) {
+			logger->info("Detected: ETS2!");
+			// Below the minimum version there might be some missing features (only minor change) or
+			// incompatible values (major change).
+			const scs_u32_t MINIMAL_VERSION = SCS_TELEMETRY_EUT2_GAME_VERSION_1_00;
+			if (version_params->common.game_version < MINIMAL_VERSION) {
+				logger->warning("Too old version of the game, some features might behave incorrectly.");
+			}
+
+			// Future versions are fine as long the major version is not changed.
+			const scs_u32_t IMPLEMENTED_VERSION = SCS_TELEMETRY_EUT2_GAME_VERSION_CURRENT;
+			if (SCS_GET_MAJOR_VERSION(version_params->common.game_version) > SCS_GET_MAJOR_VERSION(IMPLEMENTED_VERSION)) {
+				logger->warning("Too new major version of the game, some features might behave incorrectly");
+			}
+		}
+		else if (strcmp(version_params->common.game_id, SCS_GAME_ID_ATS) == 0) {
+			logger->info("Detected: ATS!");
+			// Below the minimum version there might be some missing features (only minor change) or
+			// incompatible values (major change).
+			const scs_u32_t MINIMAL_VERSION = SCS_TELEMETRY_ATS_GAME_VERSION_1_00;
+			if (version_params->common.game_version < MINIMAL_VERSION) {
+				logger->warning("Too old version of the game, some features might behave incorrectly");
+			}
+
+			// Future versions are fine as long the major version is not changed.
+			const scs_u32_t IMPLEMENTED_VERSION = SCS_TELEMETRY_ATS_GAME_VERSION_CURRENT;
+			if (SCS_GET_MAJOR_VERSION(version_params->common.game_version) > SCS_GET_MAJOR_VERSION(IMPLEMENTED_VERSION)) {
+				logger->warning("Too new major version of the game, some features might behave incorrectly");
+			}
+		}
+		else {
+			logger->warning("Unsupported game, some features or values might behave incorrectly");
+		}
+	}
+
 	void Telemetry::on_gameplay_event(const scs_telemetry_gameplay_event_t* const event) {
 		char sbuffer[128];
 		snprintf(sbuffer, 128, "Recieved gameplay event with ID: %s", event->id);

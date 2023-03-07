@@ -1,6 +1,8 @@
 #pragma once
 
 #include <mqtt/client.h>
+
+#include "sdk/scssdk_telemetry.h"
 #include "sdk/scssdk_value.h"
 #include "sdk/scssdk_telemetry_event.h"
 
@@ -17,6 +19,12 @@ namespace trucksim_mqtt {
 
 	public:
 		Telemetry(mqtt::client* client, Logger* logger);
+
+		/// <summary>
+		/// Runs the version check and logs the information based on game version.
+		/// Note that this method is purely for logging, after the basic version check in scs_telemetry_init.
+		/// </summary>
+		void version_check(const scs_telemetry_init_params_v101_t* const version_params) const;
 
 		// Event handlers
 		void on_gameplay_event(const scs_telemetry_gameplay_event_t* const event);
