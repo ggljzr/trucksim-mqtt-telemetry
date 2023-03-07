@@ -13,6 +13,7 @@ namespace trucksim_mqtt {
 	/// Class defining basic logging interface.
 	/// </summary>
 	class Logger {
+	public:
 		virtual ~Logger() {};
 
 		virtual void log(const char* msg, LogLevel level) = 0;

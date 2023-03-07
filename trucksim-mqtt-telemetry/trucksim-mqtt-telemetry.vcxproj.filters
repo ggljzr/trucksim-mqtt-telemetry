@@ -28,6 +28,9 @@
     <Filter Include="Header Files\logger">
       <UniqueIdentifier>{89e44344-29c2-4f01-a4c8-8fe1d792a064}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\logger">
+      <UniqueIdentifier>{213b8c1b-3ebd-4b12-af77-c5328802f0a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -105,7 +108,10 @@
     <ClInclude Include="telemetry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="logger\Logger.h">
+    <ClInclude Include="logger\logger.h">
+      <Filter>Header Files\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="logger\mqtt_logger.h">
       <Filter>Header Files\logger</Filter>
     </ClInclude>
   </ItemGroup>
@@ -121,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="telemetry.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logger\mqtt_logger.cpp">
+      <Filter>Source Files\logger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
