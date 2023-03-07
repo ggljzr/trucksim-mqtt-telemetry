@@ -4,5 +4,5 @@
 namespace trucksim_mqtt {
 	constexpr auto kServerAddress{ "tcp://127.0.0.1:1883" };
 	constexpr auto kClientId{ "trucksim-publisher" };
-	constexpr auto kPersistFile{ "C:/Users/gogol/source/persist" };
+	constexpr auto kPersistFile{ "./persist" };
 }
