@@ -7,4 +7,12 @@
 #ifndef PCH_H
 #define PCH_H
 
+#include <mqtt/client.h>
+
+#include "sdk/scssdk_telemetry.h"
+#include "sdk/eurotrucks2/scssdk_eut2.h"
+#include "sdk/eurotrucks2/scssdk_telemetry_eut2.h"
+#include "sdk/amtrucks/scssdk_ats.h"
+#include "sdk/amtrucks/scssdk_telemetry_ats.h"
+
 #endif //PCH_H
