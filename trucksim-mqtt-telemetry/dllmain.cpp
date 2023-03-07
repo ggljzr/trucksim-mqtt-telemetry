@@ -32,7 +32,7 @@
 #define UNUSED(x)
 
 namespace trucksim_mqtt {
-	mqtt::client mqtt_client(SERVER_ADDRESS, CLIENT_ID, PERSIST_FILE);
+	mqtt::client mqtt_client(kServerAddress, kClientId, kPersistFile);
 	Telemetry telemetry(&mqtt_client);
 
 	/// <summary>

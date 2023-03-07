@@ -5,11 +5,11 @@ namespace trucksim_mqtt {
 	/// <summary>
 	/// Root plugin topic.
 	/// </summary>
-	constexpr auto ROOT_TOPIC{ "trucksim" };
+	constexpr auto kRootTopic{ "trucksim" };
 
 	/// <summary>
 	/// Topic used to publish plugin logs.
 	/// </summary>
-	constexpr auto LOG_TOPIC{ "trucksim/log" };
+	constexpr auto kLogTopic{ "trucksim/log" };
 }
 

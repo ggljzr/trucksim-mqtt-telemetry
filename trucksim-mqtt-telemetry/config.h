@@ -2,7 +2,7 @@
 #pragma once
 
 namespace trucksim_mqtt {
-	constexpr auto SERVER_ADDRESS{ "tcp://127.0.0.1:1883" };
-	constexpr auto CLIENT_ID{ "trucksim-publisher" };
-	constexpr auto PERSIST_FILE{ "C:/Users/gogol/source/persist" };
+	constexpr auto kServerAddress{ "tcp://127.0.0.1:1883" };
+	constexpr auto kClientId{ "trucksim-publisher" };
+	constexpr auto kPersistFile{ "C:/Users/gogol/source/persist" };
 }
