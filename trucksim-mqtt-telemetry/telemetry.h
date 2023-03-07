@@ -5,6 +5,9 @@
 #include "sdk/scssdk_telemetry_event.h"
 
 namespace trucksim_mqtt {
+	/// <summary>
+	/// Class implementing callbacks for telemetry events and channels.
+	/// </summary>
 	class Telemetry {
 	private:
 		mqtt::client* client;
