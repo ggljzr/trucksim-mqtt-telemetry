@@ -3,7 +3,6 @@
 #include <mqtt/client.h>
 #include "sdk/scssdk_telemetry.h"
 
-#include "topics.h"
 #include "client.h"
 
 namespace trucksim_mqtt {
