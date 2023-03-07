@@ -25,6 +25,9 @@
     <Filter Include="Header Files\sdk\eurotrucks2">
       <UniqueIdentifier>{46ea17fc-c2cd-4b63-b39c-d189f3dd2945}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\logger">
+      <UniqueIdentifier>{89e44344-29c2-4f01-a4c8-8fe1d792a064}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -101,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="telemetry.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logger\Logger.h">
+      <Filter>Header Files\logger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

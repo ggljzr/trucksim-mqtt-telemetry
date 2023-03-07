@@ -13,7 +13,7 @@ namespace trucksim_mqtt {
 	Telemetry::Telemetry(mqtt::client* client) : client(client) {}
 
 	void Telemetry::log(const char* msg_text) {
-		auto msg = mqtt::make_message(LOG_TOPIC, msg_text);
+		auto msg = mqtt::make_message(kLogTopic, msg_text);
 		client->publish(msg);
 	}
 
