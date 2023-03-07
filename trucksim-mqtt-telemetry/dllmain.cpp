@@ -27,13 +27,15 @@
 #include "topics.h"
 #include "config.h"
 #include "client.h"
+#include "logger/mqtt_logger.h"
 #include "telemetry.h"
 
 #define UNUSED(x)
 
 namespace trucksim_mqtt {
 	mqtt::client mqtt_client(kServerAddress, kClientId, kPersistFile);
-	Telemetry telemetry(&mqtt_client);
+	MqttLogger logger(&mqtt_client);
+	Telemetry telemetry(&mqtt_client, &logger);
 
 	/// <summary>
 	/// Tracking of paused state of the game.
@@ -181,7 +183,7 @@ namespace trucksim_mqtt {
 		}
 
 		// We are connected, say hello
-		telemetry.log("Hello from ATS!");
+		logger.info("Hello from ATS!");
 
 		// Register for events. Note that failure to register those basic events
 		// likely indicates invalid usage of the api or some critical problem. As the
@@ -233,7 +235,7 @@ namespace trucksim_mqtt {
 		// so there is no need to do that manually.
 
 		game_log = NULL;
-		telemetry.log("Goodbye from ATS!");
+		logger.info("Goodbye from ATS!");
 		mqtt_client.disconnect();
 	}
 
