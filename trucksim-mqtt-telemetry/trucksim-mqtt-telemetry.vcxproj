@@ -159,7 +159,6 @@ xcopy.exe /y $(OutDir)paho-mqttpp3.dll "C:\Program Files (x86)\Steam\steamapps\c
   <ItemGroup>
     <ClInclude Include="client.h" />
     <ClInclude Include="config.h" />
-    <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="sdk\amtrucks\scssdk_ats.h" />
     <ClInclude Include="sdk\amtrucks\scssdk_input_ats.h" />
