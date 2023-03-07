@@ -47,13 +47,7 @@ namespace trucksim_mqtt {
 	/// </summary>
 	scs_timestamp_t last_timestamp = static_cast<scs_timestamp_t>(-1);
 
-	/// <summary>
-	/// Function writting message to the game internal log. Initialized in scs_telemetry_init.
-	/// </summary>
-	scs_log_t game_log = NULL;
-
 	// Handling of individual events.
-
 	SCSAPI_VOID telemetry_frame_start(const scs_event_t UNUSED(event), const void* const event_info, const scs_context_t UNUSED(context))
 	{
 		const struct scs_telemetry_frame_start_t* const info = static_cast<const scs_telemetry_frame_start_t*>(event_info);
@@ -171,13 +165,13 @@ namespace trucksim_mqtt {
 			// log_line("WARNING: Unsupported game, some features or values might behave incorrectly");
 		}
 
-		// Remember the function we will use for logging.
 
-		game_log = version_params->common.log;
-		game_log(SCS_LOG_TYPE_message, "Initializing MQTT plugin...");
+		version_params->common.log(SCS_LOG_TYPE_message, "Initializing MQTT plugin...");
 
 		// Connect to MQTT broker
-		SCSAPI_RESULT result = connect_client(&mqtt_client, game_log);
+		// Pass the game log, just to log the error in case that
+		// connecting fails.
+		SCSAPI_RESULT result = connect_client(&mqtt_client, version_params->common.log);
 		if (result != SCS_RESULT_ok) {
 			return result;
 		}
@@ -234,7 +228,6 @@ namespace trucksim_mqtt {
 		// Any cleanup needed. The registrations will be removed automatically
 		// so there is no need to do that manually.
 
-		game_log = NULL;
 		logger.info("Goodbye from ATS!");
 		mqtt_client.disconnect();
 	}
