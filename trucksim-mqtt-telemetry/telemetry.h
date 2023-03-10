@@ -1,5 +1,7 @@
 #pragma once
 
+#include <nlohmann/json.hpp>
+
 #include <mqtt/client.h>
 
 #include "sdk/scssdk_telemetry.h"
@@ -7,6 +9,8 @@
 #include "sdk/scssdk_telemetry_event.h"
 
 #include "logger/logger.h"
+
+using json = nlohmann::json;
 
 namespace trucksim_mqtt {
 	/// <summary>
@@ -31,6 +35,11 @@ namespace trucksim_mqtt {
 		/// Returns true if the game is currently paused. Tracked by on_pause event handler.
 		/// </summary>
 		bool is_paused() const { return paused; };
+
+		/// <summary>
+		/// Published given JSON data to given topic
+		/// </summary>
+		void publish(const json* const data, const char* topic) const;
 
 		// Event handlers
 

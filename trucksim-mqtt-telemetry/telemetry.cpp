@@ -2,6 +2,8 @@
 
 #include <stdio.h>
 
+#include <nlohmann/json.hpp>
+
 #include <mqtt/client.h>
 #include "sdk/scssdk_value.h"
 #include "sdk/scssdk_telemetry_event.h"
@@ -10,8 +12,15 @@
 #include "logger/logger.h"
 #include "topics.h"
 
+using json = nlohmann::json;
+
 namespace trucksim_mqtt {
 	Telemetry::Telemetry(mqtt::client* client, Logger* logger) : client(client), logger(logger) {}
+
+	void Telemetry::publish(const json* const data, const char* topic) const {
+		auto mqtt_msg = mqtt::make_message(topic, data->dump());
+		client->publish(mqtt_msg);
+	}
 
 	void Telemetry::version_check(const scs_telemetry_init_params_v101_t* const version_params) const
 	{
