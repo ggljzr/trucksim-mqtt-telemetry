@@ -9,13 +9,21 @@ ATS/ETS2 plugin for publishing game telemetry via MQTT protocol.
 Basic proof of concept. I managed to get the MQTT client running from within the plugin. It seems that MQTT
 is fast enough to publish RPM values directly from the channel handler.
 
+## Note about platform
+
+This readme describies requirements and build process for ``x64`` target platform. If you want to target different platform
+(i. e. ``x86``), you will need to make appropriate adjustments.
+
 ## Requirements
 
-Plugin uses Eclipse Paho MQTT [library](https://github.com/eclipse/paho.mqtt.cpp), which can be installed with
-[VCPKG](https://vcpkg.io/en/index.html):
+* Eclipse Paho MQTT [library](https://github.com/eclipse/paho.mqtt.cpp), 
+* https://github.com/nlohmann/json JSON library.
+
+Both can be installed with [vcpkg](https://vcpkg.io/en/index.html) (don't forget to specify the ``x64`` version):
 
 ```
 > vcpkg install paho-mqttpp3:x64-windows
+> vcpkg install nlohmann-json:x64-windows
 ```
 
 ## Building DLL file
