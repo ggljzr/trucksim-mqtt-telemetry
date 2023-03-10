@@ -27,8 +27,8 @@ namespace trucksim_mqtt {
 		void version_check(const scs_telemetry_init_params_v101_t* const version_params) const;
 
 		// Event handlers
-		void on_gameplay_event(const scs_telemetry_gameplay_event_t* const event);
-		void on_configuration_event(const scs_telemetry_configuration_t* const event);
+		void on_gameplay_event(const scs_telemetry_gameplay_event_t* const event_info);
+		void on_configuration_event(const scs_telemetry_configuration_t* const event_info);
 
 		// Channel handlers
 		void on_gear_changed(const scs_value_t* const value);
