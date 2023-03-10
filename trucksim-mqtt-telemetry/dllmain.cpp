@@ -37,12 +37,6 @@ namespace trucksim_mqtt {
 	MqttLogger logger(&mqtt_client);
 	Telemetry telemetry(&mqtt_client, &logger);
 
-	/// <summary>
-	/// Last timestamp we received.
-	/// </summary>
-	scs_timestamp_t last_timestamp = static_cast<scs_timestamp_t>(-1);
-
-	// Handling of individual events.
 	SCSAPI_VOID telemetry_frame_start(const scs_event_t event, const void* const event_info, const scs_context_t UNUSED(context))
 	{
 		const struct scs_telemetry_frame_start_t* const info = static_cast<const scs_telemetry_frame_start_t*>(event_info);
@@ -70,8 +64,6 @@ namespace trucksim_mqtt {
 		const struct scs_telemetry_gameplay_event_t* const info = static_cast<const scs_telemetry_gameplay_event_t*>(event_info);
 		telemetry.on_gameplay_event(event, info);
 	}
-
-	// Handling of individual channels.
 
 	SCSAPI_VOID telemetry_on_gear_changed(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t UNUSED(context))
 	{
@@ -138,8 +130,6 @@ namespace trucksim_mqtt {
 		version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_gear, SCS_U32_NIL, SCS_VALUE_TYPE_s32, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_on_gear_changed, NULL);
 		version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_rpm, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_on_rpm_changed, NULL);
 
-		// Set the structure with defaults.
-		last_timestamp = static_cast<scs_timestamp_t>(-1);
 
 		return SCS_RESULT_ok;
 	}
@@ -149,14 +139,9 @@ namespace trucksim_mqtt {
 	/// </summary>
 	SCSAPI_VOID scs_telemetry_shutdown(void)
 	{
-		// Any cleanup needed. The registrations will be removed automatically
-		// so there is no need to do that manually.
-
 		logger.info("Goodbye...");
 		mqtt_client.disconnect();
 	}
-
-	// Cleanup
 
 #ifdef _WIN32
 	BOOL APIENTRY DllMain(
