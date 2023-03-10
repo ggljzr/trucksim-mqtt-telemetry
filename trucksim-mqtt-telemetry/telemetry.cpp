@@ -54,13 +54,28 @@ namespace trucksim_mqtt {
 		}
 	}
 
-	void Telemetry::on_gameplay_event(const scs_telemetry_gameplay_event_t* const event_info) {
+	void Telemetry::on_frame_start(const scs_event_t event, const scs_telemetry_frame_start_t* const event_info) {
+		// noop
+	}
+
+	void Telemetry::on_frame_end(const scs_event_t event) {
+		// noop
+	}
+
+	void Telemetry::on_pause(const scs_event_t event) {
+		paused = (event == SCS_TELEMETRY_EVENT_paused);
+
+		if (paused) logger->info("Telemetry paused...");
+		else logger->info("Telemetry resumed...");
+	}
+
+	void Telemetry::on_gameplay_event(const scs_event_t event, const scs_telemetry_gameplay_event_t* const event_info) {
 		char sbuffer[128];
 		snprintf(sbuffer, 128, "Recieved gameplay event with ID: %s", event_info->id);
 		logger->info(sbuffer);
 	}
 
-	void Telemetry::on_configuration_event(const scs_telemetry_configuration_t* const event_info) {
+	void Telemetry::on_configuration_event(const scs_event_t event, const scs_telemetry_configuration_t* const event_info) {
 		char sbuffer[128];
 		snprintf(sbuffer, 128, "Recieved config event with ID: %s", event_info->id);
 		logger->info(sbuffer);

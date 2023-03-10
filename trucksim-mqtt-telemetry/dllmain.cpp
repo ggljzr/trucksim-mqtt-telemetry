@@ -38,65 +38,37 @@ namespace trucksim_mqtt {
 	Telemetry telemetry(&mqtt_client, &logger);
 
 	/// <summary>
-	/// Tracking of paused state of the game.
-	/// </summary>
-	bool output_paused = true;
-
-	/// <summary>
 	/// Last timestamp we received.
 	/// </summary>
 	scs_timestamp_t last_timestamp = static_cast<scs_timestamp_t>(-1);
 
 	// Handling of individual events.
-	SCSAPI_VOID telemetry_frame_start(const scs_event_t UNUSED(event), const void* const event_info, const scs_context_t UNUSED(context))
+	SCSAPI_VOID telemetry_frame_start(const scs_event_t event, const void* const event_info, const scs_context_t UNUSED(context))
 	{
 		const struct scs_telemetry_frame_start_t* const info = static_cast<const scs_telemetry_frame_start_t*>(event_info);
-
-		// The following processing of the timestamps is done so the output
-		// from this plugin has continuous time, it is not necessary otherwise.
-
-		// When we just initialized itself, assume that the time started
-		// just now.
-
-		if (last_timestamp == static_cast<scs_timestamp_t>(-1)) {
-			last_timestamp = info->paused_simulation_time;
-		}
-
-		// The timer might be sometimes restarted (e.g. after load) while
-		// we want to provide continuous time on our output.
-
-		if (info->flags & SCS_TELEMETRY_FRAME_START_FLAG_timer_restart) {
-			last_timestamp = 0;
-		}
-
-		// Advance the timestamp by delta since last frame.
-		last_timestamp = info->paused_simulation_time;
+		telemetry.on_frame_start(event, info);
 	}
 
-	SCSAPI_VOID telemetry_frame_end(const scs_event_t UNUSED(event), const void* const UNUSED(event_info), const scs_context_t UNUSED(context))
+	SCSAPI_VOID telemetry_frame_end(const scs_event_t event, const void* const UNUSED(event_info), const scs_context_t UNUSED(context))
 	{
-		if (output_paused) {
-			return;
-		}
-
-		// The header.
+		telemetry.on_frame_end(event);
 	}
 
 	SCSAPI_VOID telemetry_pause(const scs_event_t event, const void* const UNUSED(event_info), const scs_context_t UNUSED(context))
 	{
-		output_paused = (event == SCS_TELEMETRY_EVENT_paused);
+		telemetry.on_pause(event);
 	}
 
 	SCSAPI_VOID telemetry_configuration(const scs_event_t event, const void* const event_info, const scs_context_t UNUSED(context))
 	{
 		const struct scs_telemetry_configuration_t* const info = static_cast<const scs_telemetry_configuration_t*>(event_info);
-		telemetry.on_configuration_event(info);
+		telemetry.on_configuration_event(event, info);
 	}
 
 	SCSAPI_VOID telemetry_gameplay_event(const scs_event_t event, const void* const event_info, const scs_context_t UNUSED(context))
 	{
 		const struct scs_telemetry_gameplay_event_t* const info = static_cast<const scs_telemetry_gameplay_event_t*>(event_info);
-		telemetry.on_gameplay_event(info);
+		telemetry.on_gameplay_event(event, info);
 	}
 
 	// Handling of individual channels.
@@ -169,8 +141,6 @@ namespace trucksim_mqtt {
 		// Set the structure with defaults.
 		last_timestamp = static_cast<scs_timestamp_t>(-1);
 
-		// Initially the game is paused.
-		output_paused = true;
 		return SCS_RESULT_ok;
 	}
 

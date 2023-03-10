@@ -17,6 +17,7 @@ namespace trucksim_mqtt {
 		mqtt::client* client;
 		Logger* logger;
 
+		bool paused{ false };
 	public:
 		Telemetry(mqtt::client* client, Logger* logger);
 
@@ -26,9 +27,29 @@ namespace trucksim_mqtt {
 		/// </summary>
 		void version_check(const scs_telemetry_init_params_v101_t* const version_params) const;
 
+		/// <summary>
+		/// Returns true if the game is currently paused. Tracked by on_pause event handler.
+		/// </summary>
+		bool is_paused() const { return paused; };
+
 		// Event handlers
-		void on_gameplay_event(const scs_telemetry_gameplay_event_t* const event_info);
-		void on_configuration_event(const scs_telemetry_configuration_t* const event_info);
+
+		/// <summary>
+		/// Currently not implemented. Empty callback.
+		/// 
+		/// TODO: maybe update timestamp internally, without MQTT message?
+		/// </summary>
+		void on_frame_start(const scs_event_t event, const scs_telemetry_frame_start_t* const event_info);
+
+		/// <summary>
+		/// Currently not implemented. Empty callback.
+		/// </summary>
+		void on_frame_end(const scs_event_t event);
+
+		void on_pause(const scs_event_t event);
+
+		void on_gameplay_event(const scs_event_t event, const scs_telemetry_gameplay_event_t* const event_info);
+		void on_configuration_event(const scs_event_t event, const scs_telemetry_configuration_t* const event_info);
 
 		// Channel handlers
 		void on_gear_changed(const scs_value_t* const value);
