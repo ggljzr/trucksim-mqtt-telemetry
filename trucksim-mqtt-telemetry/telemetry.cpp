@@ -79,27 +79,27 @@ namespace trucksim_mqtt {
 	}
 
 	void Telemetry::on_gameplay_event(const scs_event_t event, const scs_telemetry_gameplay_event_t* const event_info) {
-		char sbuffer[128];
-		snprintf(sbuffer, 128, "Recieved gameplay event with ID: %s", event_info->id);
-		logger->info(sbuffer);
+		json data;
+		data["event_id"] = event_info->id;
+		publish(&data, kEventsGameplayTopic);
 	}
 
 	void Telemetry::on_configuration_event(const scs_event_t event, const scs_telemetry_configuration_t* const event_info) {
-		char sbuffer[128];
-		snprintf(sbuffer, 128, "Recieved config event with ID: %s", event_info->id);
-		logger->info(sbuffer);
+		json data;
+		data["event_id"] = event_info->id;
+		publish(&data, kEventConfigTopic);
 	}
 
 	void Telemetry::on_gear_changed(const scs_value_t* const value)
 	{
-		char sbuffer[32];
-		snprintf(sbuffer, 32, "Gear changed: %d", value->value_s32.value);
-		logger->debug(sbuffer);
+		json data;
+		data["value"] = value->value_s32.value;
+		publish(&data, kTruckEngineGearTopic);
 	};
 
 	void Telemetry::on_rpm_changed(const scs_value_t* const value) {
-		char sbuffer[64];
-		snprintf(sbuffer, 64, "RPM: %f", value->value_float.value);
-		logger->debug(sbuffer);
+		json data;
+		data["value"] = value->value_float.value;
+		publish(&data, kTruckEngineRpmTopic);
 	}
 }
