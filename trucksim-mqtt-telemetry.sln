@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{49
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "python", "python", "{134977F0-B896-4D7B-A33A-53D80B352F7F}"
 	ProjectSection(SolutionItems) = preProject
+		examples\python\logger.py = examples\python\logger.py
 		examples\python\mqtt-publisher.py = examples\python\mqtt-publisher.py
 		examples\python\mqtt-subscriber.py = examples\python\mqtt-subscriber.py
 	EndProjectSection
