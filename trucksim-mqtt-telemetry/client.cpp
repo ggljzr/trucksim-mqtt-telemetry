@@ -12,7 +12,9 @@ namespace trucksim_mqtt {
 		conn_opts.set_clean_session(true);
 
 		try {
-			client->connect(conn_opts);
+			auto conn_token = client->connect(conn_opts);
+			// wait for connection
+			conn_token->wait();
 		}
 		catch (const mqtt::exception& exc) {
 
