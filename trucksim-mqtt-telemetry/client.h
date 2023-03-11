@@ -11,5 +11,5 @@ namespace trucksim_mqtt {
 	/// Function that connects MQTT client to the broker.
 	/// </summary>
 	/// <returns>SCS_RESULT_ok if client successfully connects, SCS_RESULT_generic_error otherwise.</returns>
-	SCSAPI_RESULT connect_client(mqtt::client* client, scs_log_t game_log);
+	SCSAPI_RESULT connect_client(mqtt::async_client* client, scs_log_t game_log);
 }

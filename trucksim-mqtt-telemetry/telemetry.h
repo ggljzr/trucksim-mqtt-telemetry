@@ -19,12 +19,12 @@ namespace trucksim_mqtt {
 	/// </summary>
 	class Telemetry {
 	private:
-		mqtt::client* client;
+		mqtt::async_client* client;
 		Logger* logger;
 
 		bool paused{ false };
 	public:
-		Telemetry(mqtt::client* client, Logger* logger);
+		Telemetry(mqtt::async_client* client, Logger* logger);
 
 		/// <summary>
 		/// Runs the version check and logs the information based on game version.
