@@ -6,11 +6,14 @@ ATS/ETS2 plugin for publishing game telemetry via MQTT protocol.
 
 ## Current state
 
-Basic proof of concept. I managed to get the MQTT client running from within the plugin. It seems that multiple
-fast updating sources (like RPM, speed and orientation) will throttle the game rendering loop quite a bit, so maybe
-non blocking MQTT client will be required.
+Basic proof of concept. I managed to get the MQTT client running from within the plugin. For fast updating channels
+(like RPM or speed) its crucial to disable client persistence (by not setting the path to the persistence file).
 
-The blocking client seems ~ok for slow updating sources (fuel etc.).
+Combination of no persistence, no message retaining, QoS=0 seems to work well enough with blocking client, even for 
+fast changing channels, without noticable FPS drops.
+
+However in the future it would be nice to implement some sort of restrictions about how many messages can one channel publish.
+Especially world placement channel seems to publish a lot of messages that dont change much or at all.
 
 ## Note about platform
 
