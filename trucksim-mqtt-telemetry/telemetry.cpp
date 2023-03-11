@@ -15,13 +15,13 @@
 using json = nlohmann::json;
 
 namespace trucksim_mqtt {
-	Telemetry::Telemetry(mqtt::async_client* client, Logger* logger) : client(client), logger(logger) {}
+	Telemetry::Telemetry(mqtt::client* client, Logger* logger) : client(client), logger(logger) {}
 
 	void Telemetry::publish(const json* const data, const char* topic) const {
 		if (!client->is_connected())
 			return;
 
-		auto mqtt_msg = mqtt::make_message(topic, data->dump(), 0, false);
+		auto mqtt_msg = mqtt::make_message(topic, data->dump());
 		try {
 			client->publish(mqtt_msg);
 		}

@@ -9,7 +9,7 @@
 using json = nlohmann::json;
 
 namespace trucksim_mqtt {
-	MqttLogger::MqttLogger(mqtt::async_client* client) : client(client) {};
+	MqttLogger::MqttLogger(mqtt::client* client) : client(client) {};
 
 	void MqttLogger::log(const char* msg, LogLevel level) {
 		if (!client->is_connected())
@@ -19,7 +19,7 @@ namespace trucksim_mqtt {
 		j["msg"] = msg;
 		j["level"] = level;
 
-		auto mqtt_msg = mqtt::make_message(kLogTopic, j.dump(), 0, false);
+		auto mqtt_msg = mqtt::make_message(kLogTopic, j.dump());
 
 		try {
 			client->publish(mqtt_msg);

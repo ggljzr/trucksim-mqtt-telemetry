@@ -11,9 +11,9 @@ namespace trucksim_mqtt {
 	/// </summary>
 	class MqttLogger: public Logger {
 	private:
-		mqtt::async_client* client;
+		mqtt::client* client;
 	public:
-		MqttLogger(mqtt::async_client* client);
+		MqttLogger(mqtt::client* client);
 
 		/// <summary>
 		/// Publishes message into plugin logging topic. This method

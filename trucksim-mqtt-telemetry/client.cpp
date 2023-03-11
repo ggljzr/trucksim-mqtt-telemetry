@@ -6,15 +6,13 @@
 #include "client.h"
 
 namespace trucksim_mqtt {
-	SCSAPI_RESULT connect_client(mqtt::async_client* client, scs_log_t game_log) {
+	SCSAPI_RESULT connect_client(mqtt::client* client, scs_log_t game_log) {
 		mqtt::connect_options conn_opts;
 		conn_opts.set_keep_alive_interval(20);
 		conn_opts.set_clean_session(true);
 
 		try {
-			auto conn_token = client->connect(conn_opts);
-			// wait for connection
-			conn_token->wait();
+			client->connect(conn_opts);
 		}
 		catch (const mqtt::exception& exc) {
 
