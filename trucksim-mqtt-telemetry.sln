@@ -31,26 +31,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "javascript", "javascript", 
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C6B0C4E0-B65D-4BA5-B8E1-90DD3EE97779}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{C6B0C4E0-B65D-4BA5-B8E1-90DD3EE97779}.Debug|Any CPU.Build.0 = Debug|x64
 		{C6B0C4E0-B65D-4BA5-B8E1-90DD3EE97779}.Debug|x64.ActiveCfg = Debug|x64
 		{C6B0C4E0-B65D-4BA5-B8E1-90DD3EE97779}.Debug|x64.Build.0 = Debug|x64
-		{C6B0C4E0-B65D-4BA5-B8E1-90DD3EE97779}.Debug|x86.ActiveCfg = Debug|Win32
-		{C6B0C4E0-B65D-4BA5-B8E1-90DD3EE97779}.Debug|x86.Build.0 = Debug|Win32
-		{C6B0C4E0-B65D-4BA5-B8E1-90DD3EE97779}.Release|Any CPU.ActiveCfg = Release|x64
-		{C6B0C4E0-B65D-4BA5-B8E1-90DD3EE97779}.Release|Any CPU.Build.0 = Release|x64
 		{C6B0C4E0-B65D-4BA5-B8E1-90DD3EE97779}.Release|x64.ActiveCfg = Release|x64
 		{C6B0C4E0-B65D-4BA5-B8E1-90DD3EE97779}.Release|x64.Build.0 = Release|x64
-		{C6B0C4E0-B65D-4BA5-B8E1-90DD3EE97779}.Release|x86.ActiveCfg = Release|Win32
-		{C6B0C4E0-B65D-4BA5-B8E1-90DD3EE97779}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
