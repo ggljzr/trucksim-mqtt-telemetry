@@ -22,6 +22,13 @@ namespace trucksim_mqtt {
 		client->publish(mqtt_msg);
 	}
 
+	template<typename T>
+	void Telemetry::publish_val(const T value, const char* topic) const {
+		json data;
+		data["value"] = value;
+		publish(&data, topic);
+	}
+
 	void Telemetry::version_check(const scs_telemetry_init_params_v101_t* const version_params) const
 	{
 		logger->info("Checking game version...");
@@ -92,14 +99,11 @@ namespace trucksim_mqtt {
 
 	void Telemetry::on_gear_changed(const scs_value_t* const value)
 	{
-		json data;
-		data["value"] = value->value_s32.value;
-		publish(&data, kTruckEngineGearTopic);
-	};
+		publish_val(value->value_s32.value, kTruckEngineGearTopic);
+	}
 
-	void Telemetry::on_rpm_changed(const scs_value_t* const value) {
-		json data;
-		data["value"] = value->value_float.value;
-		publish(&data, kTruckEngineRpmTopic);
+	void Telemetry::on_rpm_changed(const scs_value_t* const value)
+	{
+		publish_val(value->value_float.value, kTruckEngineRpmTopic);
 	}
 }

@@ -9,6 +9,7 @@
 #include "sdk/scssdk_telemetry_event.h"
 
 #include "logger/logger.h"
+#include "topics.h"
 
 using json = nlohmann::json;
 
@@ -40,6 +41,12 @@ namespace trucksim_mqtt {
 		/// Published given JSON data to given topic
 		/// </summary>
 		void publish(const json* const data, const char* topic) const;
+
+		/// <summary>
+		/// Publishes single value in {"value": value} JSON.
+		/// </summary>
+		template<typename T> 
+		void publish_val(const T value, const char* topic) const;
 
 		// Event handlers
 
