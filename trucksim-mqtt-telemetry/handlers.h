@@ -30,6 +30,13 @@ namespace trucksim_mqtt {
 			const scs_context_t context
 		);
 
+		SCSAPI_VOID on_speed_changed(
+			const scs_string_t name,
+			const scs_u32_t index,
+			const scs_value_t* const value,
+			const scs_context_t context
+		);
+
 		SCSAPI_VOID on_rpm_changed(
 			const scs_string_t name,
 			const scs_u32_t index,

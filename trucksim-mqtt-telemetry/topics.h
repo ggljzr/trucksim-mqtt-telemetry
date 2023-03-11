@@ -21,15 +21,15 @@ namespace trucksim_mqtt {
 
 	// Truck channels
 
-	constexpr auto kTruckWorldPlacementTopic{ "trucksim/channel/truck/world_placement" };
+	constexpr auto kTruckWorldPlacementTopic{ "trucksim/channel/truck/world_placement" }; // implemented, not registered
 	constexpr auto kTruckSpeedTopic{ "trucksim/channel/truck/speed" };
-	constexpr auto kTruckCruiseControlTopic{ "trucksim/channel/truck/cruise_control" };
+	constexpr auto kTruckCruiseControlTopic{ "trucksim/channel/truck/cruise_control" }; // not implemented yet
 
 	constexpr auto kTruckEngineRpmTopic{ "trucksim/channel/truck/engine/rpm" };
 	constexpr auto kTruckEngineGearTopic{ "trucksim/channel/truck/engine/gear" };
 
-	constexpr auto kTruckFuelAmountTopic{ "trucksim/channel/truck/fuel/amount" };
-	constexpr auto kTruckFuelRangeTopic{ "trucksim/channel/truck/fuel/range" };
-	constexpr auto kTruckFuelWarningTopic{ "trucksim/channel/truck/fuel/warning" };
+	constexpr auto kTruckFuelAmountTopic{ "trucksim/channel/truck/fuel/amount" }; // not implemented yet
+	constexpr auto kTruckFuelRangeTopic{ "trucksim/channel/truck/fuel/range" }; // not implemented yet
+	constexpr auto kTruckFuelWarningTopic{ "trucksim/channel/truck/fuel/warning" }; // not implemented yet
 }
 
