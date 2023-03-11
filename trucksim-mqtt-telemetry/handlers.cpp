@@ -51,7 +51,7 @@ namespace trucksim_mqtt {
 		SCSAPI_VOID on_world_placement(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
 		{
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
-			telemetry->on_world_placement(&value->value_euler);
+			telemetry->on_world_placement(&value->value_dplacement);
 		}
 
 		SCSAPI_VOID on_speed_changed(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
@@ -139,7 +139,7 @@ namespace trucksim_mqtt {
 			// (SCS_RESULT_unsupported_type). For purpose of this example we ignore the failues
 			// so the unsupported channels will remain at theirs default value.
 
-			//version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_world_placement, SCS_U32_NIL, SCS_VALUE_TYPE_euler, SCS_TELEMETRY_CHANNEL_FLAG_none, on_world_placement, telemetry);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_world_placement, SCS_U32_NIL, SCS_VALUE_TYPE_euler, SCS_TELEMETRY_CHANNEL_FLAG_none, on_world_placement, telemetry);
 			//version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_speed, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_speed_changed, telemetry);
 	
 			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_cruise_control, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_cruise_control, telemetry);
