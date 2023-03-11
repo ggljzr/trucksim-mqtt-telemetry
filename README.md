@@ -54,5 +54,6 @@ Both debug and release configurations also define ``NOMINMAX`` flag for preproce
 
 ## Links
 
-* [RenCloud](https://github.com/RenCloud/scs-sdk-plugin) -- performance friendly plugin with more complete API that uses in memory files for communication.
-* [Route advisor app](https://github.com/mike-koch/ets2-mobile-route-advisor).
+* [RenCloud](https://github.com/RenCloud/scs-sdk-plugin) -- performance friendly plugin with more complete API that uses in memory files for communication,
+* [Route advisor app](https://github.com/mike-koch/ets2-mobile-route-advisor),
+* [ATS/ETS2 map tiles](https://github.com/Unicor-p/SCS_Map_Tiles).
