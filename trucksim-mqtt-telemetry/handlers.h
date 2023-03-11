@@ -7,8 +7,6 @@
 
 #include "telemetry.h"
 
-// Channel handlers
-
 namespace trucksim_mqtt {
 	namespace handlers {
 		SCSAPI_VOID on_frame_start(const scs_event_t event, const void* const event_info, const scs_context_t context);
