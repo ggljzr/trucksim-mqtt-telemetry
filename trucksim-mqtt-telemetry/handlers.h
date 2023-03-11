@@ -9,12 +9,16 @@
 
 namespace trucksim_mqtt {
 	namespace handlers {
+
+		#pragma region EventHandlers
 		SCSAPI_VOID on_frame_start(const scs_event_t event, const void* const event_info, const scs_context_t context);
 		SCSAPI_VOID on_frame_end(const scs_event_t event, const void* const event_info, const scs_context_t context);
 		SCSAPI_VOID on_config_event(const scs_event_t event, const void* const event_info, const scs_context_t context);
 		SCSAPI_VOID on_gameplay_event(const scs_event_t event, const void* const event_info, const scs_context_t context);
 		SCSAPI_VOID on_pause(const scs_event_t event, const void* const event_info, const scs_context_t context);
+		#pragma endregion
 
+		#pragma region ChannelHandlers
 		SCSAPI_VOID on_rpm_changed(
 			const scs_string_t name,
 			const scs_u32_t index,
@@ -27,6 +31,7 @@ namespace trucksim_mqtt {
 			const scs_u32_t index,
 			const scs_value_t* const value,
 			const scs_context_t context);
+		#pragma endregion
 
 		/// <summary>
 		/// Function that registers all telemetry handlers with SDK API. Note that this function takes Telemetry pointer

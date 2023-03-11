@@ -11,6 +11,8 @@
 
 namespace trucksim_mqtt {
 	namespace handlers {
+
+		#pragma region EventHandlers 
 		SCSAPI_VOID on_frame_start(const scs_event_t event, const void* const event_info, const scs_context_t context)
 		{
 			const struct scs_telemetry_frame_start_t* const info = static_cast<const scs_telemetry_frame_start_t*>(event_info);
@@ -43,7 +45,9 @@ namespace trucksim_mqtt {
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
 			telemetry->on_gameplay_event(event, info);
 		}
+		#pragma endregion
 
+		#pragma region ChannelHandlers
 		SCSAPI_VOID on_gear_changed(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
 		{
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
@@ -54,6 +58,7 @@ namespace trucksim_mqtt {
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
 			telemetry->publish_val(value->value_float.value, kTruckEngineRpmTopic);
 		}
+		#pragma endregion
 
 		SCSAPI_RESULT register_handlers(const scs_telemetry_init_params_v101_t* const version_params, Telemetry* telemetry)
 		{
