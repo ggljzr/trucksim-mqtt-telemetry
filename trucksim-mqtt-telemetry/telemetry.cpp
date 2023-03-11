@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include <stdio.h>
+#include <chrono>
 
 #include <nlohmann/json.hpp>
 
@@ -8,6 +9,7 @@
 #include "sdk/scssdk_value.h"
 #include "sdk/scssdk_telemetry_event.h"
 
+#include "config.h"
 #include "telemetry.h"
 #include "logger/logger.h"
 #include "topics.h"
@@ -111,7 +113,16 @@ namespace trucksim_mqtt {
 		publish(&data, kEventConfigTopic);
 	}
 
-	void Telemetry::on_world_placement(const scs_value_dplacement_t* const value) const {
+	void Telemetry::on_world_placement(const scs_value_dplacement_t* const value) {
+		// get current timepoint
+		auto now = std::chrono::high_resolution_clock::now();
+		auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(now - last_world_placement_update);
+
+		// only publish the update if given period passed
+		if (delta < kWorldPlacementUpdatePeriod) {
+			return;
+		}
+
 		json data;
 		data["heading"] = value->orientation.heading * 360.0f;
 		data["pitch"] = value->orientation.pitch * 360.0f;
@@ -121,5 +132,6 @@ namespace trucksim_mqtt {
 		data["z"] = value->position.z;
 
 		publish(&data, kTruckWorldPlacementTopic);
+		last_world_placement_update = now;
 	}
 }

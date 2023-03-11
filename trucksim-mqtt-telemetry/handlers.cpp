@@ -50,7 +50,7 @@ namespace trucksim_mqtt {
 		#pragma region ChannelHandlers
 		SCSAPI_VOID on_world_placement(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
 		{
-			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
+			Telemetry* telemetry = static_cast<Telemetry*>(context);
 			telemetry->on_world_placement(&value->value_dplacement);
 		}
 

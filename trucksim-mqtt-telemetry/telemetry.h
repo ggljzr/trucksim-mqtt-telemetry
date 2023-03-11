@@ -1,5 +1,7 @@
 #pragma once
 
+#include <chrono>
+
 #include <nlohmann/json.hpp>
 
 #include <mqtt/client.h>
@@ -22,6 +24,7 @@ namespace trucksim_mqtt {
 		mqtt::client* client;
 		Logger* logger;
 
+		std::chrono::steady_clock::time_point last_world_placement_update{};
 		bool paused{ false };
 	public:
 		Telemetry(mqtt::client* client, Logger* logger);
@@ -66,6 +69,6 @@ namespace trucksim_mqtt {
 		void on_gameplay_event(const scs_event_t event, const scs_telemetry_gameplay_event_t* const event_info) const;
 		void on_config_event(const scs_event_t event, const scs_telemetry_configuration_t* const event_info) const;
 
-		void on_world_placement(const scs_value_dplacement_t* const dplacement_val) const;
+		void on_world_placement(const scs_value_dplacement_t* const dplacement_val);
 	};
 }
