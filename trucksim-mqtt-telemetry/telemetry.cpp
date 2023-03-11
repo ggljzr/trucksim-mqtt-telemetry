@@ -29,6 +29,12 @@ namespace trucksim_mqtt {
 		publish(&data, topic);
 	}
 
+	// These define types thath publis_val can actually be called with.
+	// See https://isocpp.org/wiki/faq/templates#separate-template-fn-defn-from-decl
+
+	template void Telemetry::publish_val<scs_float_t>(const scs_float_t value, const char* topic) const;
+	template void Telemetry::publish_val<scs_s32_t>(const scs_s32_t value, const char* topic) const;
+
 	void Telemetry::version_check(const scs_telemetry_init_params_v101_t* const version_params) const
 	{
 		logger->info("Checking game version...");
@@ -70,11 +76,11 @@ namespace trucksim_mqtt {
 		}
 	}
 
-	void Telemetry::on_frame_start(const scs_event_t event, const scs_telemetry_frame_start_t* const event_info) {
+	void Telemetry::on_frame_start(const scs_event_t event, const scs_telemetry_frame_start_t* const event_info) const {
 		// noop
 	}
 
-	void Telemetry::on_frame_end(const scs_event_t event) {
+	void Telemetry::on_frame_end(const scs_event_t event) const {
 		// noop
 	}
 
@@ -85,25 +91,15 @@ namespace trucksim_mqtt {
 		else logger->info("Telemetry resumed...");
 	}
 
-	void Telemetry::on_gameplay_event(const scs_event_t event, const scs_telemetry_gameplay_event_t* const event_info) {
+	void Telemetry::on_gameplay_event(const scs_event_t event, const scs_telemetry_gameplay_event_t* const event_info) const {
 		json data;
 		data["event_id"] = event_info->id;
 		publish(&data, kEventsGameplayTopic);
 	}
 
-	void Telemetry::on_configuration_event(const scs_event_t event, const scs_telemetry_configuration_t* const event_info) {
+	void Telemetry::on_configuration_event(const scs_event_t event, const scs_telemetry_configuration_t* const event_info) const {
 		json data;
 		data["event_id"] = event_info->id;
 		publish(&data, kEventConfigTopic);
-	}
-
-	void Telemetry::on_gear_changed(const scs_value_t* const value)
-	{
-		publish_val(value->value_s32.value, kTruckEngineGearTopic);
-	}
-
-	void Telemetry::on_rpm_changed(const scs_value_t* const value)
-	{
-		publish_val(value->value_float.value, kTruckEngineRpmTopic);
 	}
 }

@@ -48,27 +48,21 @@ namespace trucksim_mqtt {
 		template<typename T> 
 		void publish_val(const T value, const char* topic) const;
 
-		// Event handlers
-
 		/// <summary>
 		/// Currently not implemented. Empty callback.
 		/// 
 		/// TODO: maybe update timestamp internally, without MQTT message?
 		/// </summary>
-		void on_frame_start(const scs_event_t event, const scs_telemetry_frame_start_t* const event_info);
+		void on_frame_start(const scs_event_t event, const scs_telemetry_frame_start_t* const event_info) const;
 
 		/// <summary>
 		/// Currently not implemented. Empty callback.
 		/// </summary>
-		void on_frame_end(const scs_event_t event);
+		void on_frame_end(const scs_event_t event) const;
 
 		void on_pause(const scs_event_t event);
 
-		void on_gameplay_event(const scs_event_t event, const scs_telemetry_gameplay_event_t* const event_info);
-		void on_configuration_event(const scs_event_t event, const scs_telemetry_configuration_t* const event_info);
-
-		// Channel handlers
-		void on_gear_changed(const scs_value_t* const value);
-		void on_rpm_changed(const scs_value_t* const value);
+		void on_gameplay_event(const scs_event_t event, const scs_telemetry_gameplay_event_t* const event_info) const;
+		void on_configuration_event(const scs_event_t event, const scs_telemetry_configuration_t* const event_info) const;
 	};
 }

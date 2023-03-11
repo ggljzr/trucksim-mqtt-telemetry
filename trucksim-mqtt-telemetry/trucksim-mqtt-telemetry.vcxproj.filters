@@ -114,6 +114,9 @@
     <ClInclude Include="logger\mqtt_logger.h">
       <Filter>Header Files\logger</Filter>
     </ClInclude>
+    <ClInclude Include="handlers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -130,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="logger\mqtt_logger.cpp">
       <Filter>Source Files\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="handlers.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

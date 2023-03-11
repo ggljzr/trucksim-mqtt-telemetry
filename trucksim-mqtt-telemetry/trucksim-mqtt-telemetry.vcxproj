@@ -159,6 +159,7 @@ xcopy.exe /y $(OutDir)paho-mqttpp3.dll "C:\Program Files (x86)\Steam\steamapps\c
   <ItemGroup>
     <ClInclude Include="client.h" />
     <ClInclude Include="config.h" />
+    <ClInclude Include="handlers.h" />
     <ClInclude Include="logger\logger.h" />
     <ClInclude Include="logger\mqtt_logger.h" />
     <ClInclude Include="pch.h" />
@@ -188,6 +189,7 @@ xcopy.exe /y $(OutDir)paho-mqttpp3.dll "C:\Program Files (x86)\Steam\steamapps\c
   <ItemGroup>
     <ClCompile Include="client.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="handlers.cpp" />
     <ClCompile Include="logger\mqtt_logger.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../pch.h</PrecompiledHeaderFile>
     </ClCompile>
