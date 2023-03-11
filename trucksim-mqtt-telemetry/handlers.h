@@ -49,6 +49,24 @@ namespace trucksim_mqtt {
 			const scs_u32_t index,
 			const scs_value_t* const value,
 			const scs_context_t context);
+
+		SCSAPI_VOID on_fuel_amount(
+			const scs_string_t name,
+			const scs_u32_t index,
+			const scs_value_t* const value,
+			const scs_context_t context);
+
+		SCSAPI_VOID on_fuel_range(
+			const scs_string_t name,
+			const scs_u32_t index,
+			const scs_value_t* const value,
+			const scs_context_t context);
+
+		SCSAPI_VOID on_fuel_warning(
+			const scs_string_t name,
+			const scs_u32_t index,
+			const scs_value_t* const value,
+			const scs_context_t context);
 		#pragma endregion
 
 		/// <summary>

@@ -70,6 +70,24 @@ namespace trucksim_mqtt {
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
 			telemetry->publish_val(value->value_s32.value, kTruckEngineGearTopic);
 		}
+
+		SCSAPI_VOID on_fuel_amount(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
+		{
+			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
+			telemetry->publish_val(value->value_float.value, kTruckFuelAmountTopic);
+		}
+
+		SCSAPI_VOID on_fuel_range(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
+		{
+			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
+			telemetry->publish_val(value->value_float.value, kTruckFuelRangeTopic);
+		}
+
+		SCSAPI_VOID on_fuel_warning(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
+		{
+			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
+			telemetry->publish_val(value->value_bool.value, kTruckFuelWarningTopic);
+		}
 		#pragma endregion
 
 		SCSAPI_RESULT register_handlers(const scs_telemetry_init_params_v101_t* const version_params, Telemetry* telemetry)
@@ -103,7 +121,11 @@ namespace trucksim_mqtt {
 			
 			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_rpm, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_rpm_changed, telemetry);
 			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_gear, SCS_U32_NIL, SCS_VALUE_TYPE_s32, SCS_TELEMETRY_CHANNEL_FLAG_none, on_gear_changed, telemetry);
-			
+		
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_fuel, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_fuel_amount, telemetry);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_fuel_range, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_fuel_range, telemetry);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_fuel_warning, SCS_U32_NIL, SCS_VALUE_TYPE_bool, SCS_TELEMETRY_CHANNEL_FLAG_none, on_fuel_warning, telemetry);
+
 			return SCS_RESULT_ok;
 		}
 	}

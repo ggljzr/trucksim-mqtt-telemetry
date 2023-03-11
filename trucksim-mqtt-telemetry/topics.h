@@ -28,8 +28,8 @@ namespace trucksim_mqtt {
 	constexpr auto kTruckEngineRpmTopic{ "trucksim/channel/truck/engine/rpm" };
 	constexpr auto kTruckEngineGearTopic{ "trucksim/channel/truck/engine/gear" };
 
-	constexpr auto kTruckFuelAmountTopic{ "trucksim/channel/truck/fuel/amount" }; // not implemented yet
-	constexpr auto kTruckFuelRangeTopic{ "trucksim/channel/truck/fuel/range" }; // not implemented yet
-	constexpr auto kTruckFuelWarningTopic{ "trucksim/channel/truck/fuel/warning" }; // not implemented yet
+	constexpr auto kTruckFuelAmountTopic{ "trucksim/channel/truck/fuel/amount" };
+	constexpr auto kTruckFuelRangeTopic{ "trucksim/channel/truck/fuel/range" };
+	constexpr auto kTruckFuelWarningTopic{ "trucksim/channel/truck/fuel/warning" };
 }
 
