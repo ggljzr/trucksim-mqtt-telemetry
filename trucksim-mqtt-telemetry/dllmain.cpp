@@ -58,7 +58,7 @@ namespace trucksim_mqtt {
 		// We are connected, do version check
 		telemetry.version_check(version_params);
 
-		SCSAPI_RESULT handlers_registered = register_handlers(version_params, &telemetry);
+		SCSAPI_RESULT handlers_registered = handlers::register_handlers(version_params, &telemetry);
 		if (result != SCS_RESULT_ok) {
 			return result;
 		}
