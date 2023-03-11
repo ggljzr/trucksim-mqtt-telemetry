@@ -54,4 +54,4 @@ Both debug and release configurations also define ``NOMINMAX`` flag for preproce
 
 ## Links
 
-* [RenCloud](https://github.com/RenCloud/scs-sdk-plugin) telemetry plugin.
+* [RenCloud](https://github.com/RenCloud/scs-sdk-plugin) -- performance friendly plugin with more complete API that uses in memory files for communication.
