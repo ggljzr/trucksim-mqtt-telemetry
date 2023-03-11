@@ -12,7 +12,7 @@ namespace trucksim_mqtt {
 	MqttLogger::MqttLogger(mqtt::client* client) : client(client) {};
 
 	void MqttLogger::log(const char* msg, LogLevel level) {
-		if (client->is_connected())
+		if (!client->is_connected())
 			return;
 
 		json j;
