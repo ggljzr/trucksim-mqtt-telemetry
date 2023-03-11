@@ -13,7 +13,10 @@ Combination of no persistence, no message retaining, QoS=0 seems to work well en
 fast changing channels, without noticable FPS drops.
 
 However in the future it would be nice to implement some sort of restrictions about how many messages can one channel publish.
-Especially world placement channel seems to publish a lot of messages that dont change much or at all.
+Especially world placement channel seems to publish a lot of messages that don't change much or at all. It would also be nice
+to have some config file that will allow user to only register channels they need.
+
+For now, I commented out some fast updating channels registration, since I don't plan to use them.
 
 ## Note about platform
 

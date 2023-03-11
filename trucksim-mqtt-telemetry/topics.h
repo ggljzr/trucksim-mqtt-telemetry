@@ -23,9 +23,9 @@ namespace trucksim_mqtt {
 
 	constexpr auto kTruckWorldPlacementTopic{ "trucksim/channel/truck/world_placement" }; // implemented, not registered
 	constexpr auto kTruckSpeedTopic{ "trucksim/channel/truck/speed" }; // implemented, not registered
-	constexpr auto kTruckCruiseControlTopic{ "trucksim/channel/truck/cruise_control" }; // not implemented yet
+	constexpr auto kTruckCruiseControlTopic{ "trucksim/channel/truck/cruise_control" };
 
-	constexpr auto kTruckEngineRpmTopic{ "trucksim/channel/truck/engine/rpm" };
+	constexpr auto kTruckEngineRpmTopic{ "trucksim/channel/truck/engine/rpm" }; // implemented, not registered
 	constexpr auto kTruckEngineGearTopic{ "trucksim/channel/truck/engine/gear" };
 
 	constexpr auto kTruckFuelAmountTopic{ "trucksim/channel/truck/fuel/amount" };
