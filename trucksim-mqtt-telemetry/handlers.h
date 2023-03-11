@@ -9,11 +9,11 @@
 
 namespace trucksim_mqtt {
 	namespace handlers {
-		SCSAPI_VOID frame_start(const scs_event_t event, const void* const event_info, const scs_context_t context);
-		SCSAPI_VOID frame_end(const scs_event_t event, const void* const event_info, const scs_context_t context);
-		SCSAPI_VOID configuration(const scs_event_t event, const void* const event_info, const scs_context_t context);
-		SCSAPI_VOID gameplay_event(const scs_event_t event, const void* const event_info, const scs_context_t context);
-		SCSAPI_VOID pause(const scs_event_t event, const void* const event_info, const scs_context_t context);
+		SCSAPI_VOID on_frame_start(const scs_event_t event, const void* const event_info, const scs_context_t context);
+		SCSAPI_VOID on_frame_end(const scs_event_t event, const void* const event_info, const scs_context_t context);
+		SCSAPI_VOID on_config_event(const scs_event_t event, const void* const event_info, const scs_context_t context);
+		SCSAPI_VOID on_gameplay_event(const scs_event_t event, const void* const event_info, const scs_context_t context);
+		SCSAPI_VOID on_pause(const scs_event_t event, const void* const event_info, const scs_context_t context);
 
 		SCSAPI_VOID on_rpm_changed(
 			const scs_string_t name,

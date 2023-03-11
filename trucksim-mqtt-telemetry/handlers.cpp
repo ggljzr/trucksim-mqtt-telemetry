@@ -11,33 +11,33 @@
 
 namespace trucksim_mqtt {
 	namespace handlers {
-		SCSAPI_VOID frame_start(const scs_event_t event, const void* const event_info, const scs_context_t context)
+		SCSAPI_VOID on_frame_start(const scs_event_t event, const void* const event_info, const scs_context_t context)
 		{
 			const struct scs_telemetry_frame_start_t* const info = static_cast<const scs_telemetry_frame_start_t*>(event_info);
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
 			telemetry->on_frame_start(event, info);
 		}
 
-		SCSAPI_VOID frame_end(const scs_event_t event, const void* const event_info, const scs_context_t context)
+		SCSAPI_VOID on_frame_end(const scs_event_t event, const void* const event_info, const scs_context_t context)
 		{
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
 			telemetry->on_frame_end(event);
 		}
 
-		SCSAPI_VOID pause(const scs_event_t event, const void* const event_info, const scs_context_t context)
+		SCSAPI_VOID on_pause(const scs_event_t event, const void* const event_info, const scs_context_t context)
 		{
 			Telemetry* telemetry = static_cast<Telemetry*>(context);
 			telemetry->on_pause(event);
 		}
 
-		SCSAPI_VOID configuration(const scs_event_t event, const void* const event_info, const scs_context_t context)
+		SCSAPI_VOID on_config_event(const scs_event_t event, const void* const event_info, const scs_context_t context)
 		{
 			const struct scs_telemetry_configuration_t* const info = static_cast<const scs_telemetry_configuration_t*>(event_info);
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
 			telemetry->on_configuration_event(event, info);
 		}
 
-		SCSAPI_VOID gameplay_event(const scs_event_t event, const void* const event_info, const scs_context_t context)
+		SCSAPI_VOID on_gameplay_event(const scs_event_t event, const void* const event_info, const scs_context_t context)
 		{
 			const struct scs_telemetry_gameplay_event_t* const info = static_cast<const scs_telemetry_gameplay_event_t*>(event_info);
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
@@ -58,10 +58,10 @@ namespace trucksim_mqtt {
 		SCSAPI_RESULT register_handlers(const scs_telemetry_init_params_v101_t* const version_params, const scs_context_t context)
 		{
 			const bool events_registered =
-				(version_params->register_for_event(SCS_TELEMETRY_EVENT_frame_start, frame_start, NULL) == SCS_RESULT_ok) &&
-				(version_params->register_for_event(SCS_TELEMETRY_EVENT_frame_end, frame_end, NULL) == SCS_RESULT_ok) &&
-				(version_params->register_for_event(SCS_TELEMETRY_EVENT_paused, pause, NULL) == SCS_RESULT_ok) &&
-				(version_params->register_for_event(SCS_TELEMETRY_EVENT_started, pause, NULL) == SCS_RESULT_ok)
+				(version_params->register_for_event(SCS_TELEMETRY_EVENT_frame_start, on_frame_start, context) == SCS_RESULT_ok) &&
+				(version_params->register_for_event(SCS_TELEMETRY_EVENT_frame_end, on_frame_end, context) == SCS_RESULT_ok) &&
+				(version_params->register_for_event(SCS_TELEMETRY_EVENT_paused, on_pause, context) == SCS_RESULT_ok) &&
+				(version_params->register_for_event(SCS_TELEMETRY_EVENT_started, on_pause, context) == SCS_RESULT_ok)
 				;
 			if (!events_registered) {
 				version_params->common.log(SCS_LOG_TYPE_error, "Unable to register event callbacks");
@@ -70,10 +70,10 @@ namespace trucksim_mqtt {
 
 			// Register for the configuration info. As this example only prints the retrieved
 			// data, it can operate even if that fails.
-			version_params->register_for_event(SCS_TELEMETRY_EVENT_configuration, configuration, NULL);
+			version_params->register_for_event(SCS_TELEMETRY_EVENT_configuration, on_config_event, context);
 
 			// Register for gameplay events.
-			version_params->register_for_event(SCS_TELEMETRY_EVENT_gameplay, gameplay_event, NULL);
+			version_params->register_for_event(SCS_TELEMETRY_EVENT_gameplay, on_gameplay_event, context);
 
 			// Register for channels. The channel might be missing if the game does not support
 			// it (SCS_RESULT_not_found) or if does not support the requested type
