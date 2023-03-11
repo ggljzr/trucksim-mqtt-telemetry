@@ -22,7 +22,10 @@ namespace trucksim_mqtt {
 			return;
 
 		auto mqtt_msg = mqtt::make_message(topic, data->dump());
-		client->publish(mqtt_msg);
+		try {
+			client->publish(mqtt_msg);
+		}
+		catch (mqtt::timeout_error) {};
 	}
 
 	template<typename T>

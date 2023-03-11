@@ -20,6 +20,10 @@ namespace trucksim_mqtt {
 		j["level"] = level;
 
 		auto mqtt_msg = mqtt::make_message(kLogTopic, j.dump());
-		client->publish(mqtt_msg);
+
+		try {
+			client->publish(mqtt_msg);
+		}
+		catch(mqtt::timeout_error) {}
 	}
 }
