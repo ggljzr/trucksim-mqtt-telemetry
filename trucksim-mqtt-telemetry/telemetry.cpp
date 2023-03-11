@@ -18,6 +18,9 @@ namespace trucksim_mqtt {
 	Telemetry::Telemetry(mqtt::client* client, Logger* logger) : client(client), logger(logger) {}
 
 	void Telemetry::publish(const json* const data, const char* topic) const {
+		if (!client->is_connected())
+			return;
+
 		auto mqtt_msg = mqtt::make_message(topic, data->dump());
 		client->publish(mqtt_msg);
 	}

@@ -38,7 +38,8 @@ namespace trucksim_mqtt {
 		bool is_paused() const { return paused; };
 
 		/// <summary>
-		/// Published given JSON data to given topic
+		/// Published given JSON data to given topic. This method
+		/// is safe to call even when MQTT client is not connected (no operation will be performed).
 		/// </summary>
 		void publish(const json* const data, const char* topic) const;
 
