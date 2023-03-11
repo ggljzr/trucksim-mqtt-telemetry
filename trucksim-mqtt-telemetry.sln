@@ -22,6 +22,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "python", "python", "{134977
 		examples\python\mqtt-subscriber.py = examples\python\mqtt-subscriber.py
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "javascript", "javascript", "{E68B8318-9ECE-418A-879A-59C56A9E9526}"
+	ProjectSection(SolutionItems) = preProject
+		examples\javascript\index.html = examples\javascript\index.html
+		examples\javascript\mqtt-4.3.7.min.js = examples\javascript\mqtt-4.3.7.min.js
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +57,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{494389E8-5A24-4256-BE81-A7E266FAB150} = {96DCC234-FA47-412F-B152-D4B777692629}
 		{134977F0-B896-4D7B-A33A-53D80B352F7F} = {494389E8-5A24-4256-BE81-A7E266FAB150}
+		{E68B8318-9ECE-418A-879A-59C56A9E9526} = {494389E8-5A24-4256-BE81-A7E266FAB150}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BAAC84EF-EB23-4CF0-8E9D-AB7219574EC3}

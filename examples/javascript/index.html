@@ -1,0 +1,21 @@
+<html>
+
+<head>
+    <title>MQTT example</title>
+</head>
+
+<body>
+    <script src="./mqtt-4.3.7.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <script>
+        const client = mqtt.connect("ws://localhost:8080");
+        client.subscribe("trucksim/channel/truck/navigation/distance");
+
+        client.on("message", function (topic, payload) {
+            console.log(payload);
+        })
+    </script>
+</body>
+
+</html>
