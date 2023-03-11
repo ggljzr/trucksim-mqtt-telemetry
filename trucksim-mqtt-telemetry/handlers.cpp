@@ -55,13 +55,13 @@ namespace trucksim_mqtt {
 			telemetry->publish_val(value->value_float.value, kTruckEngineRpmTopic);
 		}
 
-		SCSAPI_RESULT register_handlers(const scs_telemetry_init_params_v101_t* const version_params, const scs_context_t context)
+		SCSAPI_RESULT register_handlers(const scs_telemetry_init_params_v101_t* const version_params, Telemetry* telemetry)
 		{
 			const bool events_registered =
-				(version_params->register_for_event(SCS_TELEMETRY_EVENT_frame_start, on_frame_start, context) == SCS_RESULT_ok) &&
-				(version_params->register_for_event(SCS_TELEMETRY_EVENT_frame_end, on_frame_end, context) == SCS_RESULT_ok) &&
-				(version_params->register_for_event(SCS_TELEMETRY_EVENT_paused, on_pause, context) == SCS_RESULT_ok) &&
-				(version_params->register_for_event(SCS_TELEMETRY_EVENT_started, on_pause, context) == SCS_RESULT_ok)
+				(version_params->register_for_event(SCS_TELEMETRY_EVENT_frame_start, on_frame_start, telemetry) == SCS_RESULT_ok) &&
+				(version_params->register_for_event(SCS_TELEMETRY_EVENT_frame_end, on_frame_end, telemetry) == SCS_RESULT_ok) &&
+				(version_params->register_for_event(SCS_TELEMETRY_EVENT_paused, on_pause, telemetry) == SCS_RESULT_ok) &&
+				(version_params->register_for_event(SCS_TELEMETRY_EVENT_started, on_pause, telemetry) == SCS_RESULT_ok)
 				;
 			if (!events_registered) {
 				version_params->common.log(SCS_LOG_TYPE_error, "Unable to register event callbacks");
@@ -70,17 +70,17 @@ namespace trucksim_mqtt {
 
 			// Register for the configuration info. As this example only prints the retrieved
 			// data, it can operate even if that fails.
-			version_params->register_for_event(SCS_TELEMETRY_EVENT_configuration, on_config_event, context);
+			version_params->register_for_event(SCS_TELEMETRY_EVENT_configuration, on_config_event, telemetry);
 
 			// Register for gameplay events.
-			version_params->register_for_event(SCS_TELEMETRY_EVENT_gameplay, on_gameplay_event, context);
+			version_params->register_for_event(SCS_TELEMETRY_EVENT_gameplay, on_gameplay_event, telemetry);
 
 			// Register for channels. The channel might be missing if the game does not support
 			// it (SCS_RESULT_not_found) or if does not support the requested type
 			// (SCS_RESULT_unsupported_type). For purpose of this example we ignore the failues
 			// so the unsupported channels will remain at theirs default value.
-			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_gear, SCS_U32_NIL, SCS_VALUE_TYPE_s32, SCS_TELEMETRY_CHANNEL_FLAG_none, on_gear_changed, context);
-			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_rpm, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_rpm_changed, context);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_gear, SCS_U32_NIL, SCS_VALUE_TYPE_s32, SCS_TELEMETRY_CHANNEL_FLAG_none, on_gear_changed, telemetry);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_rpm, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_rpm_changed, telemetry);
 			return SCS_RESULT_ok;
 		}
 	}

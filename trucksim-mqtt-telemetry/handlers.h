@@ -5,6 +5,8 @@
 #include "sdk/scssdk_telemetry.h"
 #include "sdk/scssdk_telemetry_event.h"
 
+#include "telemetry.h"
+
 // Channel handlers
 
 namespace trucksim_mqtt {
@@ -29,8 +31,9 @@ namespace trucksim_mqtt {
 			const scs_context_t context);
 
 		/// <summary>
-		/// Function that registers all telemetry handlers with SDK API.
+		/// Function that registers all telemetry handlers with SDK API. Note that this function takes Telemetry pointer
+		/// as argument, ensuring that each handler will be correctly registered with this pointer as context.
 		/// </summary>
-		SCSAPI_RESULT register_handlers(const scs_telemetry_init_params_v101_t* const version_params, const scs_context_t context);
+		SCSAPI_RESULT register_handlers(const scs_telemetry_init_params_v101_t* const version_params, Telemetry* telemetry);
 	}
 }
