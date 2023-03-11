@@ -6,8 +6,11 @@ ATS/ETS2 plugin for publishing game telemetry via MQTT protocol.
 
 ## Current state
 
-Basic proof of concept. I managed to get the MQTT client running from within the plugin. It seems that MQTT
-is fast enough to publish RPM values directly from the channel handler.
+Basic proof of concept. I managed to get the MQTT client running from within the plugin. It seems that multiple
+fast updating sources (like RPM, speed and orientation) will throttle the game rendering loop quite a bit, so maybe
+non blocking MQTT client will be required.
+
+The blocking client seems ~ok for slow updating sources (fuel etc.).
 
 ## Note about platform
 
