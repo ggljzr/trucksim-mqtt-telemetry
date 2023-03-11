@@ -34,7 +34,7 @@ namespace trucksim_mqtt {
 		{
 			const struct scs_telemetry_configuration_t* const info = static_cast<const scs_telemetry_configuration_t*>(event_info);
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
-			telemetry->on_configuration_event(event, info);
+			telemetry->on_config_event(event, info);
 		}
 
 		SCSAPI_VOID on_gameplay_event(const scs_event_t event, const void* const event_info, const scs_context_t context)
