@@ -32,7 +32,7 @@
 #include "telemetry.h"
 
 namespace trucksim_mqtt {
-	mqtt::async_client mqtt_client(kServerAddress, kClientId, kPersistFile);
+	mqtt::async_client mqtt_client(kServerAddress, kClientId);
 	MqttLogger logger(&mqtt_client);
 	Telemetry telemetry(&mqtt_client, &logger);
 
