@@ -58,6 +58,12 @@ namespace trucksim_mqtt {
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
 			telemetry->publish_val(value->value_float.value, kTruckEngineRpmTopic);
 		}
+
+		SCSAPI_VOID trucksim_mqtt::handlers::on_world_placement(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
+		{
+			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
+			telemetry->on_world_placement(&value->value_euler);
+		}
 		#pragma endregion
 
 		SCSAPI_RESULT register_handlers(const scs_telemetry_init_params_v101_t* const version_params, Telemetry* telemetry)
@@ -84,8 +90,11 @@ namespace trucksim_mqtt {
 			// it (SCS_RESULT_not_found) or if does not support the requested type
 			// (SCS_RESULT_unsupported_type). For purpose of this example we ignore the failues
 			// so the unsupported channels will remain at theirs default value.
+			//version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_world_placement, SCS_U32_NIL, SCS_VALUE_TYPE_euler, SCS_TELEMETRY_CHANNEL_FLAG_none, on_world_placement, telemetry);
 			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_gear, SCS_U32_NIL, SCS_VALUE_TYPE_s32, SCS_TELEMETRY_CHANNEL_FLAG_none, on_gear_changed, telemetry);
 			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_rpm, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_rpm_changed, telemetry);
+			
+			
 			return SCS_RESULT_ok;
 		}
 	}

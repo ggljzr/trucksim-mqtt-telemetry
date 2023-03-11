@@ -65,5 +65,7 @@ namespace trucksim_mqtt {
 
 		void on_gameplay_event(const scs_event_t event, const scs_telemetry_gameplay_event_t* const event_info) const;
 		void on_config_event(const scs_event_t event, const scs_telemetry_configuration_t* const event_info) const;
+
+		void on_world_placement(const scs_value_euler_t* const value) const;
 	};
 }

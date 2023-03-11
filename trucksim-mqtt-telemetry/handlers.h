@@ -19,6 +19,17 @@ namespace trucksim_mqtt {
 		#pragma endregion
 
 		#pragma region ChannelHandlers
+		
+		// For some reason this callback is called
+		// even when the value does not change, so it is unregistered for now
+		// (needs some caching implemented).
+		SCSAPI_VOID on_world_placement(
+			const scs_string_t name,
+			const scs_u32_t index,
+			const scs_value_t* const value,
+			const scs_context_t context
+		);
+
 		SCSAPI_VOID on_rpm_changed(
 			const scs_string_t name,
 			const scs_u32_t index,

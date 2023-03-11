@@ -108,4 +108,13 @@ namespace trucksim_mqtt {
 		data["event_id"] = event_info->id;
 		publish(&data, kEventConfigTopic);
 	}
+
+	void Telemetry::on_world_placement(const scs_value_euler_t* const value) const {
+		json data;
+		data["heading"] = value->heading * 360.0f;
+		data["pitch"] = value->pitch * 360.0f;
+		data["roll"] = value->roll * 360.0f;
+
+		publish(&data, kTruckWorldPlacementTopic);
+	}
 }
