@@ -31,5 +31,9 @@ namespace trucksim_mqtt {
 	constexpr auto kTruckFuelAmountTopic{ "trucksim/channel/truck/fuel/amount" };
 	constexpr auto kTruckFuelRangeTopic{ "trucksim/channel/truck/fuel/range" };
 	constexpr auto kTruckFuelWarningTopic{ "trucksim/channel/truck/fuel/warning" };
+
+	constexpr auto kTruckNavigationDistanceTopic{ "trucksim/channel/truck/navigation/distance" };
+	constexpr auto kTruckNavigationTimeTopic{ "trucksim/channel/truck/navigation/time" };
+	constexpr auto kTruckNavigationSpeedLimitTopic{ "trucksim/channel/truck/navigation/speed/limit" };
 }
 

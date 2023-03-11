@@ -74,6 +74,24 @@ namespace trucksim_mqtt {
 			const scs_u32_t index,
 			const scs_value_t* const value,
 			const scs_context_t context);
+
+		SCSAPI_VOID on_navigation_distance(
+			const scs_string_t name,
+			const scs_u32_t index,
+			const scs_value_t* const value,
+			const scs_context_t context);
+
+		SCSAPI_VOID on_navigation_time(
+			const scs_string_t name,
+			const scs_u32_t index,
+			const scs_value_t* const value,
+			const scs_context_t context);
+
+		SCSAPI_VOID on_navigation_speed_limit(
+			const scs_string_t name,
+			const scs_u32_t index,
+			const scs_value_t* const value,
+			const scs_context_t context);
 		#pragma endregion
 
 		/// <summary>

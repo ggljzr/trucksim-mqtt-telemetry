@@ -94,6 +94,24 @@ namespace trucksim_mqtt {
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
 			telemetry->publish_val(value->value_bool.value, kTruckFuelWarningTopic);
 		}
+
+		SCSAPI_VOID on_navigation_distance(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
+		{
+			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
+			telemetry->publish_val(value->value_float.value, kTruckNavigationDistanceTopic);
+		}
+
+		SCSAPI_VOID on_navigation_time(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
+		{
+			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
+			telemetry->publish_val(value->value_float.value, kTruckNavigationTimeTopic);
+		}
+
+		SCSAPI_VOID on_navigation_speed_limit(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
+		{
+			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
+			telemetry->publish_val(value->value_float.value, kTruckNavigationSpeedLimitTopic);
+		}
 		#pragma endregion
 
 		SCSAPI_RESULT register_handlers(const scs_telemetry_init_params_v101_t* const version_params, Telemetry* telemetry)
@@ -132,6 +150,10 @@ namespace trucksim_mqtt {
 			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_fuel, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_fuel_amount, telemetry);
 			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_fuel_range, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_fuel_range, telemetry);
 			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_fuel_warning, SCS_U32_NIL, SCS_VALUE_TYPE_bool, SCS_TELEMETRY_CHANNEL_FLAG_none, on_fuel_warning, telemetry);
+
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_navigation_distance, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_navigation_time, telemetry);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_navigation_time, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_navigation_distance, telemetry);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_navigation_speed_limit, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_navigation_speed_limit, telemetry);
 
 			return SCS_RESULT_ok;
 		}
