@@ -18,15 +18,18 @@ to have some config file that will allow user to only register channels they nee
 
 For now, I commented out some fast updating channels registration, since I don't plan to use them.
 
-### TODO
-
-* Topic documentation (for now see ``topics.h``),
-* config file.
-
 ## Note about platform
 
 This readme describies requirements and build process for ``x64`` target platform. If you want to target different platform
 (i. e. ``x86``), you will need to make appropriate adjustments.
+
+## MQTT broker
+
+You need an MQTT broker to run this plugin. I recommend running the [Mosquitto](https://mosquitto.org/) broker on the same machine
+as the game itself, to minimize the latency. Other clients (subscribers) can connect to the broker from elsewhere (e. g. from LAN).
+
+For now, the connection to the broker is hardcoded (defined in ``config.h``) and defaults to ``tcp://127.0.0.1:1883``. To change this
+you need to recompile the plugin. I will hopefully add option to load configuration from a file some time soon.
 
 ## Requirements
 
