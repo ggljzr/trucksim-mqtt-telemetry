@@ -21,7 +21,7 @@ namespace trucksim_mqtt {
 		if (!client->is_connected())
 			return;
 
-		auto mqtt_msg = mqtt::make_message(topic, data->dump());
+		auto mqtt_msg = mqtt::make_message(topic, data->dump(), 0, false);
 		try {
 			client->publish(mqtt_msg);
 		}

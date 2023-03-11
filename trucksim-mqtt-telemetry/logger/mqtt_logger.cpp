@@ -19,7 +19,7 @@ namespace trucksim_mqtt {
 		j["msg"] = msg;
 		j["level"] = level;
 
-		auto mqtt_msg = mqtt::make_message(kLogTopic, j.dump());
+		auto mqtt_msg = mqtt::make_message(kLogTopic, j.dump(), 0, false);
 
 		try {
 			client->publish(mqtt_msg);
