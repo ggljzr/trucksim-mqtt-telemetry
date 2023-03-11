@@ -5,15 +5,31 @@
 </head>
 
 <body>
+    Navigation distance:
+    <p id="nav-distance"></p>
+
     <script src="./mqtt-4.3.7.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
     <script>
+        const logTopic = "trucksim/log";
+        const navDistanceTopic = "trucksim/channel/truck/navigation/distance"
+
         const client = mqtt.connect("ws://localhost:8080");
-        client.subscribe("trucksim/channel/truck/navigation/distance");
+        client.subscribe(logTopic);
+        client.subscribe(navDistanceTopic);
+
+        const decoder = new TextDecoder();
 
         client.on("message", function (topic, payload) {
-            console.log(payload);
+            // convert payload bytes to string and
+            // then parse that string as a JSON
+            const payload_obj = JSON.parse(decoder.decode(payload));
+            if (topic === logTopic)
+                console.log(payload_obj);
+            else if (topic === navDistanceTopic) {
+                $("#nav-distance").text(payload_obj.value)
+            }
         })
     </script>
 </body>
