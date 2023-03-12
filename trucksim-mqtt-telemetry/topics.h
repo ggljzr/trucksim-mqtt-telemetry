@@ -17,7 +17,9 @@ namespace trucksim_mqtt {
 	constexpr auto kEventsGameplayTopic{ "trucksim/event/gameplay" };
 	constexpr auto kEventConfigTopic{ "trucksim/event/config" };
 
-	// Channel topics
+	// Channel topic prefix, used to mapping SCS SDK constants to topics
+	// note the trailing slash
+	constexpr auto kChannelTopicPrefix{ "trucksim/channel/" };
 
 	// Truck channels
 

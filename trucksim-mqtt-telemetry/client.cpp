@@ -1,9 +1,15 @@
 #include "pch.h"
 
+#include <string>
+#include <stdlib.h>
+#include <algorithm>
+
 #include <mqtt/client.h>
 #include "sdk/scssdk_telemetry.h"
 
+#include "topics.h"
 #include "client.h"
+
 
 namespace trucksim_mqtt {
 	SCSAPI_RESULT connect_client(mqtt::client* client, scs_log_t game_log) {
@@ -25,5 +31,13 @@ namespace trucksim_mqtt {
 		}
 
 		return SCS_RESULT_ok;
+	}
+
+	std::string channel_to_topic(const scs_string_t channel_name)
+	{
+		auto topic_string = std::string(channel_name);
+		std::replace(topic_string.begin(), topic_string.end(), '.', '/');
+		topic_string.insert(0, kChannelTopicPrefix);
+		return topic_string;
 	}
 }
