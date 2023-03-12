@@ -24,18 +24,18 @@ namespace trucksim_mqtt {
 	// Truck channels
 
 	constexpr auto kTruckWorldPlacementTopic{ "trucksim/channel/truck/world_placement" }; // registered, time limited
-	constexpr auto kTruckSpeedTopic{ "trucksim/channel/truck/speed" }; // implemented, not registered
-	constexpr auto kTruckCruiseControlTopic{ "trucksim/channel/truck/cruise_control" };
 
-	constexpr auto kTruckEngineRpmTopic{ "trucksim/channel/truck/engine/rpm" }; // implemented, not registered
-	constexpr auto kTruckEngineGearTopic{ "trucksim/channel/truck/engine/gear" };
+	// Other currently implemented topics with universal handlers
+	// "trucksim/channel/truck/speed" -- implemented, not registered
+	// "trucksim/channel/truck/cruise_control"
+	// "trucksim/channel/truck/engine/rpm" -- implemented, not registered
+	// "trucksim/channel/truck/engine/gear"
+	// "trucksim/channel/truck/fuel/amount"
+	// "trucksim/channel/truck/fuel/range"
+	// "trucksim/channel/truck/fuel/warning"
+	// "trucksim/channel/truck/navigation/distance"
+	// "trucksim/channel/truck/navigation/time"
+	// "trucksim/channel/truck/navigation/speed/limit"
 
-	constexpr auto kTruckFuelAmountTopic{ "trucksim/channel/truck/fuel/amount" };
-	constexpr auto kTruckFuelRangeTopic{ "trucksim/channel/truck/fuel/range" };
-	constexpr auto kTruckFuelWarningTopic{ "trucksim/channel/truck/fuel/warning" };
-
-	constexpr auto kTruckNavigationDistanceTopic{ "trucksim/channel/truck/navigation/distance" };
-	constexpr auto kTruckNavigationTimeTopic{ "trucksim/channel/truck/navigation/time" };
-	constexpr auto kTruckNavigationSpeedLimitTopic{ "trucksim/channel/truck/navigation/speed/limit" };
 }
 

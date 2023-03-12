@@ -20,9 +20,9 @@ namespace trucksim_mqtt {
 
 		#pragma region ChannelHandlers
 		
-		// For some reason this callback is called
-		// even when the value does not change, so it is unregistered for now
-		// (needs some caching implemented).
+		/// <summary>
+		/// Special callback for world placement.
+		/// </summary>
 		SCSAPI_VOID on_world_placement(
 			const scs_string_t name,
 			const scs_u32_t index,
@@ -30,68 +30,41 @@ namespace trucksim_mqtt {
 			const scs_context_t context
 		);
 
-		SCSAPI_VOID on_speed_changed(
+		/// <summary>
+		/// Universal callback for float channels.
+		/// </summary>
+		/// <param name="name">used for topic resolution</param>
+		/// <param name="context">pointer to Telemetry instance</param>
+		SCSAPI_VOID on_float_val(
 			const scs_string_t name,
 			const scs_u32_t index,
 			const scs_value_t* const value,
 			const scs_context_t context
 		);
 
-		SCSAPI_VOID on_cruise_control(
+		/// <summary>
+		/// Universal callback fro s32 channels.
+		/// </summary>
+		/// <param name="name">used for topic resolution</param>
+		/// <param name="context">pointer to Telemetry instance</param>
+		SCSAPI_VOID on_s32_val(
 			const scs_string_t name,
 			const scs_u32_t index,
 			const scs_value_t* const value,
 			const scs_context_t context
 		);
 
-		SCSAPI_VOID on_rpm_changed(
+		/// <summary>
+		/// Universal callback for bool channels.
+		/// </summary>
+		/// <param name="name">used for topic resolution</param>
+		/// <param name="context">pointer to Telemetry instance</param>
+		SCSAPI_VOID on_bool_val(
 			const scs_string_t name,
 			const scs_u32_t index,
 			const scs_value_t* const value,
 			const scs_context_t context
 		);
-
-		SCSAPI_VOID on_gear_changed(
-			const scs_string_t name,
-			const scs_u32_t index,
-			const scs_value_t* const value,
-			const scs_context_t context);
-
-		SCSAPI_VOID on_fuel_amount(
-			const scs_string_t name,
-			const scs_u32_t index,
-			const scs_value_t* const value,
-			const scs_context_t context);
-
-		SCSAPI_VOID on_fuel_range(
-			const scs_string_t name,
-			const scs_u32_t index,
-			const scs_value_t* const value,
-			const scs_context_t context);
-
-		SCSAPI_VOID on_fuel_warning(
-			const scs_string_t name,
-			const scs_u32_t index,
-			const scs_value_t* const value,
-			const scs_context_t context);
-
-		SCSAPI_VOID on_navigation_distance(
-			const scs_string_t name,
-			const scs_u32_t index,
-			const scs_value_t* const value,
-			const scs_context_t context);
-
-		SCSAPI_VOID on_navigation_time(
-			const scs_string_t name,
-			const scs_u32_t index,
-			const scs_value_t* const value,
-			const scs_context_t context);
-
-		SCSAPI_VOID on_navigation_speed_limit(
-			const scs_string_t name,
-			const scs_u32_t index,
-			const scs_value_t* const value,
-			const scs_context_t context);
 		#pragma endregion
 
 		/// <summary>

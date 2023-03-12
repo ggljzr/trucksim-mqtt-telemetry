@@ -6,6 +6,7 @@
 #include "sdk/scssdk_telemetry_event.h"
 
 #include "telemetry.h"
+#include "client.h"
 
 #include "handlers.h"
 
@@ -54,63 +55,21 @@ namespace trucksim_mqtt {
 			telemetry->on_world_placement(&value->value_dplacement);
 		}
 
-		SCSAPI_VOID on_speed_changed(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
+		SCSAPI_VOID on_float_val(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
 		{
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
-			telemetry->publish_val(value->value_float.value, kTruckSpeedTopic);
+			telemetry->publish_val(value->value_float.value, channel_to_topic(name).c_str());
 		}
 
-		SCSAPI_VOID on_cruise_control(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
+		SCSAPI_VOID on_s32_val(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
 		{
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
-			telemetry->publish_val(value->value_float.value, kTruckCruiseControlTopic);
+			telemetry->publish_val(value->value_s32.value, channel_to_topic(name).c_str());
 		}
 
-		SCSAPI_VOID on_rpm_changed(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context) {
+		SCSAPI_VOID on_bool_val(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context) {
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
-			telemetry->publish_val(value->value_float.value, kTruckEngineRpmTopic);
-		}
-
-		SCSAPI_VOID on_gear_changed(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
-		{
-			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
-			telemetry->publish_val(value->value_s32.value, kTruckEngineGearTopic);
-		}
-
-		SCSAPI_VOID on_fuel_amount(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
-		{
-			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
-			telemetry->publish_val(value->value_float.value, kTruckFuelAmountTopic);
-		}
-
-		SCSAPI_VOID on_fuel_range(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
-		{
-			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
-			telemetry->publish_val(value->value_float.value, kTruckFuelRangeTopic);
-		}
-
-		SCSAPI_VOID on_fuel_warning(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
-		{
-			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
-			telemetry->publish_val(value->value_bool.value, kTruckFuelWarningTopic);
-		}
-
-		SCSAPI_VOID on_navigation_distance(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
-		{
-			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
-			telemetry->publish_val(value->value_float.value, kTruckNavigationDistanceTopic);
-		}
-
-		SCSAPI_VOID on_navigation_time(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
-		{
-			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
-			telemetry->publish_val(value->value_float.value, kTruckNavigationTimeTopic);
-		}
-
-		SCSAPI_VOID on_navigation_speed_limit(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
-		{
-			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
-			telemetry->publish_val(value->value_float.value, kTruckNavigationSpeedLimitTopic);
+			telemetry->publish_val(value->value_bool.value, channel_to_topic(name).c_str());
 		}
 		#pragma endregion
 
@@ -140,20 +99,20 @@ namespace trucksim_mqtt {
 			// so the unsupported channels will remain at theirs default value.
 
 			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_world_placement, SCS_U32_NIL, SCS_VALUE_TYPE_euler, SCS_TELEMETRY_CHANNEL_FLAG_none, on_world_placement, telemetry);
-			//version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_speed, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_speed_changed, telemetry);
+			//version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_speed, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_bool_val, telemetry);
 	
-			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_cruise_control, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_cruise_control, telemetry);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_cruise_control, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_float_val, telemetry);
 
-			//version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_rpm, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_rpm_changed, telemetry);
-			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_gear, SCS_U32_NIL, SCS_VALUE_TYPE_s32, SCS_TELEMETRY_CHANNEL_FLAG_none, on_gear_changed, telemetry);
+			//version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_rpm, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_float_val, telemetry);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_gear, SCS_U32_NIL, SCS_VALUE_TYPE_s32, SCS_TELEMETRY_CHANNEL_FLAG_none, on_s32_val, telemetry);
 		
-			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_fuel, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_fuel_amount, telemetry);
-			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_fuel_range, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_fuel_range, telemetry);
-			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_fuel_warning, SCS_U32_NIL, SCS_VALUE_TYPE_bool, SCS_TELEMETRY_CHANNEL_FLAG_none, on_fuel_warning, telemetry);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_fuel, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_float_val, telemetry);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_fuel_range, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_float_val, telemetry);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_fuel_warning, SCS_U32_NIL, SCS_VALUE_TYPE_bool, SCS_TELEMETRY_CHANNEL_FLAG_none, on_bool_val, telemetry);
 
-			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_navigation_distance, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_navigation_distance, telemetry);
-			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_navigation_time, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_navigation_time, telemetry);
-			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_navigation_speed_limit, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_navigation_speed_limit, telemetry);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_navigation_distance, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_float_val, telemetry);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_navigation_time, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_float_val, telemetry);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_navigation_speed_limit, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_float_val, telemetry);
 
 			return SCS_RESULT_ok;
 		}
