@@ -14,7 +14,17 @@ namespace trucksim_mqtt {
 	/// </summary>
 	class Logger {
 	public:
-		virtual ~Logger() {};
+		// we have other constructors, so we have to have a default one
+		Logger() = default;
+
+		// forbbid accidental move/copying
+		// See ISOCPP Guidelines C67
+		Logger(const Logger&) = delete;
+		Logger& operator=(const Logger&) = delete;
+		Logger(Logger&&) = delete;
+		Logger& operator=(const Logger&&) = delete;
+
+		virtual ~Logger() = default;
 
 		virtual void log(const char* msg, LogLevel level) = 0;
 
