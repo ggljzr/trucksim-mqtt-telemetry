@@ -8,6 +8,11 @@
 #include "telemetry.h"
 
 namespace trucksim_mqtt {
+
+	/// <summary>
+	/// Handlers registered with SDK API, used to delegate calls to Telemetry methods. Telemetry
+	/// instance is always passed via context argument.
+	/// </summary>
 	namespace handlers {
 
 		#pragma region EventHandlers

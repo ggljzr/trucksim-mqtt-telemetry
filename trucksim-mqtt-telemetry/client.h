@@ -20,7 +20,5 @@ namespace trucksim_mqtt {
 	/// Translates the channel name from SCS SDK to MQTT topic string (with root topic prefix).
 	/// E. g. "truck.navigation.time" -> "trucksim/channel/truck/navigation/time"
 	/// </summary>
-	/// <param name="channel_name"></param>
-	/// <returns></returns>
 	std::string channel_to_topic(const scs_string_t channel_name);
 }
