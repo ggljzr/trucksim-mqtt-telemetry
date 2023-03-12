@@ -17,7 +17,7 @@ using json = nlohmann::json;
 
 namespace trucksim_mqtt {
 	/// <summary>
-	/// Class implementing callbacks for telemetry events and channels.
+	/// Class responsible for publishing data from telemetry callbacks.
 	/// </summary>
 	class Telemetry {
 	private:
