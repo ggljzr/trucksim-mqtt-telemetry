@@ -47,7 +47,9 @@ namespace trucksim_mqtt {
 		void publish(const json* const data, const char* topic) const;
 
 		/// <summary>
-		/// Publishes single value in {"value": value} JSON.
+		/// Publishes single value in {"value": value} JSON. Note that topic really
+		/// is a topic (e. g. "trucksim/channels/truck/engine/rpm") not a SCS SDK channel name 
+		/// (e. g. "truck.engine.rpm"). Translation from channel names to topics is done in handlers.cpp.
 		/// </summary>
 		template<typename T> 
 		void publish_val(const T value, const char* topic) const;
