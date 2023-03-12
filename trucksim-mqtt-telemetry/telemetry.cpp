@@ -44,6 +44,7 @@ namespace trucksim_mqtt {
 	template void Telemetry::publish_val<scs_s32_t>(const scs_s32_t value, const char* topic) const;
 	// also for bool values from SCS API
 	template void Telemetry::publish_val<scs_u8_t>(const scs_u8_t value, const char* topic) const;
+	template void Telemetry::publish_val<scs_string_t>(const scs_string_t value, const char* topic) const;
 
 	void Telemetry::version_check(const scs_telemetry_init_params_v101_t* const version_params) const
 	{
