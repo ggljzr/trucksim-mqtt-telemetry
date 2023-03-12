@@ -39,8 +39,11 @@ you need to recompile the plugin. I will hopefully add option to load configurat
 Both can be installed with [vcpkg](https://vcpkg.io/en/index.html) (don't forget to specify the ``x64`` version):
 
 ```
+# v1.2.0#1
 > vcpkg install paho-mqttpp3:x64-windows
-> vcpkg install nlohmann-json:x64-windows
+
+# v3.11.2
+> vcpkg install nlohmann-json:x64-windows 
 ```
 
 ## Building DLL file
