@@ -69,6 +69,12 @@ namespace trucksim_mqtt {
 		void on_gameplay_event(const scs_event_t event, const scs_telemetry_gameplay_event_t* const event_info) const;
 		void on_config_event(const scs_event_t event, const scs_telemetry_configuration_t* const event_info) const;
 
+		/// <summary>
+		/// Method for publishing information about world placement.
+		/// This method implements basic rate limiting: publishing the
+		/// updates only if at least kWorldPlacementUpdatePeriod milliseconds passed
+		/// since the last published world placement update.
+		/// </summary>
 		void on_world_placement(const scs_value_dplacement_t* const dplacement_val);
 	};
 }
