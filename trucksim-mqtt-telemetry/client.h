@@ -19,8 +19,23 @@ namespace trucksim_mqtt {
 	SCSAPI_RESULT connect_client(mqtt::async_client* client, scs_log_t game_log, long timeout = 3000L);
 
 	/// <summary>
-	/// Translates the channel name from SCS SDK to MQTT topic string (with root topic prefix).
+	/// Translates the name from SCS SDK to MQTT topic string (with root topic prefix).
+	/// Basically replaces "." with "/" and adds given topic prefix (like "trucksim/channel/").
+	/// </summary>
+	std::string sdkname_to_topic(const scs_string_t name, const char * topic_prefix);
+
+	/// <summary>
+	/// Translator for channel names:
 	/// E. g. "truck.navigation.time" -> "trucksim/channel/truck/navigation/time"
 	/// </summary>
-	std::string channel_to_topic(const scs_string_t channel_name);
+	/// <returns></returns>
+	std::string channel_to_topic(const scs_string_t name);
+
+	/// <summary>
+	/// Translator for config event names:
+	/// E. g. "trailer.1" -> "trucksim/event/config/trailer/1"
+	/// </summary>
+	/// <param name="name"></param>
+	/// <returns></returns>
+	std::string config_to_topic(const scs_string_t name);
 }

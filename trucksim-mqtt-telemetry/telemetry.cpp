@@ -13,6 +13,7 @@
 #include "telemetry.h"
 #include "logger/logger.h"
 #include "topics.h"
+#include "client.h"
 
 using json = nlohmann::json;
 
@@ -111,7 +112,7 @@ namespace trucksim_mqtt {
 	void Telemetry::on_config_event(const scs_event_t event, const scs_telemetry_configuration_t* const event_info) const {
 		json data;
 		data["event_id"] = event_info->id;
-		publish(&data, kEventConfigTopic);
+		publish(&data, config_to_topic(event_info->id).c_str());
 	}
 
 	void Telemetry::on_world_placement(const scs_value_dplacement_t* const value) {

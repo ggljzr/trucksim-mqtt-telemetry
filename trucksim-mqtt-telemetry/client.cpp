@@ -35,11 +35,19 @@ namespace trucksim_mqtt {
 		return SCS_RESULT_ok;
 	}
 
-	std::string channel_to_topic(const scs_string_t channel_name)
+	std::string sdkname_to_topic(const scs_string_t name, const char * topic_prefix)
 	{
-		auto topic_string = std::string(channel_name);
+		auto topic_string = std::string(name);
 		std::replace(topic_string.begin(), topic_string.end(), '.', '/');
-		topic_string.insert(0, kChannelTopicPrefix);
+		topic_string.insert(0, topic_prefix);
 		return topic_string;
+	}
+
+	std::string channel_to_topic(const scs_string_t name) {
+		return sdkname_to_topic(name, kChannelTopicPrefix);
+	}
+
+	std::string config_to_topic(const scs_string_t name) {
+		return sdkname_to_topic(name, kEventConfigTopicPrefix);
 	}
 }
