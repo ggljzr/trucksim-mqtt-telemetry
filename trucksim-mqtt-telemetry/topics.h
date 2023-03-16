@@ -47,7 +47,7 @@ namespace trucksim_mqtt {
 
 	// Truck channels
 
-	constexpr auto kTruckWorldPlacementTopic{ "trucksim/channel/truck/world_placement" }; // registered, time limited
+	constexpr auto kTruckWorldPlacementTopic{ "trucksim/channel/truck/world/placement" }; // registered, time limited
 
 	// Other currently implemented topics with universal handlers
 	// "trucksim/channel/truck/speed" -- implemented, not registered
