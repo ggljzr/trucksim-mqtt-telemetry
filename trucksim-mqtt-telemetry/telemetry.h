@@ -4,7 +4,7 @@
 
 #include <nlohmann/json.hpp>
 
-#include <mqtt/client.h>
+#include <mqtt/async_client.h>
 
 #include "sdk/scssdk_telemetry.h"
 #include "sdk/scssdk_value.h"
@@ -21,13 +21,13 @@ namespace trucksim_mqtt {
 	/// </summary>
 	class Telemetry {
 	private:
-		mqtt::client* client;
+		mqtt::async_client* client;
 		Logger* logger;
 
 		std::chrono::steady_clock::time_point last_world_placement_update{};
 		bool paused{ false };
 	public:
-		Telemetry(mqtt::client* client, Logger* logger);
+		Telemetry(mqtt::async_client* client, Logger* logger);
 
 		/// <summary>
 		/// Runs the version check and logs the information based on game version.

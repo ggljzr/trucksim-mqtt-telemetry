@@ -1,7 +1,7 @@
 #include "../pch.h"
 
 #include <nlohmann/json.hpp>
-#include <mqtt/client.h>
+#include <mqtt/async_client.h>
 
 #include "logger.h"
 #include "mqtt_logger.h"
@@ -9,7 +9,7 @@
 using json = nlohmann::json;
 
 namespace trucksim_mqtt {
-	MqttLogger::MqttLogger(mqtt::client* client) : client(client) {};
+	MqttLogger::MqttLogger(mqtt::async_client* client) : client(client) {};
 
 	void MqttLogger::log(const char* msg, LogLevel level) {
 		if (!client->is_connected())

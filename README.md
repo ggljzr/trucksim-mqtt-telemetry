@@ -9,8 +9,10 @@ ATS/ETS2 plugin for publishing game telemetry via MQTT protocol.
 Basic proof of concept. I managed to get the MQTT client running from within the plugin. For fast updating channels
 (like RPM or speed) its crucial to disable client persistence (by not setting the path to the persistence file).
 
-Combination of no persistence, no message retaining, QoS=0 seems to work well enough with blocking client, even for 
-fast changing channels, without noticable FPS drops.
+Combination of no persistence, no message retaining, QoS=0 seems to work well enough, even for 
+fast changing channels, without noticable FPS drops. Also the Paho MQTT blocking client is just a wrapper over async client
+that blocks with ``wait_for()`` calls, so I guess there is no point using blocking client over async client for fire and forget
+messages.
 
 However in the future it would be nice to implement some sort of restrictions about how many messages can one channel publish.
 Especially world placement channel seems to publish a lot of messages that don't change much or at all. It would also be nice

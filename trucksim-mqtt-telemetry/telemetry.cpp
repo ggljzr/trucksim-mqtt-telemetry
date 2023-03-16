@@ -5,7 +5,7 @@
 
 #include <nlohmann/json.hpp>
 
-#include <mqtt/client.h>
+#include <mqtt/async_client.h>
 #include "sdk/scssdk_value.h"
 #include "sdk/scssdk_telemetry_event.h"
 
@@ -17,7 +17,7 @@
 using json = nlohmann::json;
 
 namespace trucksim_mqtt {
-	Telemetry::Telemetry(mqtt::client* client, Logger* logger) : client(client), logger(logger) {}
+	Telemetry::Telemetry(mqtt::async_client* client, Logger* logger) : client(client), logger(logger) {}
 
 	void Telemetry::publish(const json* const data, const char* topic) const {
 		if (!client->is_connected())

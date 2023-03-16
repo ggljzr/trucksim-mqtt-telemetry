@@ -14,7 +14,7 @@
 #include <string.h>
 
 // MQTT Lib
-#include <mqtt/client.h>
+#include <mqtt/async_client.h>
 
 // SDK
 #include "sdk/scssdk_telemetry.h"
@@ -32,7 +32,7 @@
 #include "telemetry.h"
 
 namespace trucksim_mqtt {
-	mqtt::client mqtt_client(kServerAddress, kClientId);
+	mqtt::async_client mqtt_client(kServerAddress, kClientId);
 	MqttLogger logger(&mqtt_client);
 	Telemetry telemetry(&mqtt_client, &logger);
 
