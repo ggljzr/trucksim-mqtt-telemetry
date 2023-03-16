@@ -14,7 +14,9 @@ namespace trucksim_mqtt {
 
 	// Event topics
 
-	constexpr auto kEventsGameplayTopic{ "trucksim/event/gameplay" };
+	// Gameplay event topic prefix, used to config events to topics.
+	// note the trailing slash
+	constexpr auto kEventsGameplayTopicPrefix{ "trucksim/event/gameplay/" };
 
 	// Config event topic prefix, used to config events to topics.
 	// note the trailing slash

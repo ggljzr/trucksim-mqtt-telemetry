@@ -50,4 +50,8 @@ namespace trucksim_mqtt {
 	std::string config_to_topic(const scs_string_t name) {
 		return sdkname_to_topic(name, kEventConfigTopicPrefix);
 	}
+
+	std::string gameplay_to_topic(const scs_string_t name) {
+		return sdkname_to_topic(name, kEventsGameplayTopicPrefix);
+	}
 }

@@ -106,7 +106,7 @@ namespace trucksim_mqtt {
 	void Telemetry::on_gameplay_event(const scs_event_t event, const scs_telemetry_gameplay_event_t* const event_info) const {
 		json data;
 		data["event_id"] = event_info->id;
-		publish(&data, kEventsGameplayTopic);
+		publish(&data, gameplay_to_topic(event_info->id).c_str());
 	}
 
 	void Telemetry::on_config_event(const scs_event_t event, const scs_telemetry_configuration_t* const event_info) const {

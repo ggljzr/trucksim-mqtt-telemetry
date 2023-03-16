@@ -35,7 +35,11 @@ namespace trucksim_mqtt {
 	/// Translator for config event names:
 	/// E. g. "trailer.1" -> "trucksim/event/config/trailer/1"
 	/// </summary>
-	/// <param name="name"></param>
-	/// <returns></returns>
 	std::string config_to_topic(const scs_string_t name);
+
+	/// <summary>
+	/// Translator for gameplay event names:
+	/// E. g. "player.fined" -> "trucksim/event/gameplay/player/fined"
+	/// </summary>
+	std::string gameplay_to_topic(const scs_string_t name);
 }
