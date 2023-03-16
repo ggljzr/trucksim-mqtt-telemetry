@@ -6,7 +6,7 @@
 #include "sdk/scssdk_telemetry_event.h"
 
 #include "telemetry.h"
-#include "client.h"
+#include "sdk_mqtt_interop.h"
 
 #include "handlers.h"
 

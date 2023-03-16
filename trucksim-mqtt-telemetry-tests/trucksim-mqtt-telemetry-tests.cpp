@@ -3,7 +3,7 @@
 
 #include "../trucksim-mqtt-telemetry/sdk/scssdk.h"
 #include "../trucksim-mqtt-telemetry/sdk/common/scssdk_telemetry_truck_common_channels.h"
-#include "../trucksim-mqtt-telemetry/client.h"
+#include "../trucksim-mqtt-telemetry/sdk_mqtt_interop.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

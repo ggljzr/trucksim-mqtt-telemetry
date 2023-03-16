@@ -8,12 +8,12 @@
 #include <mqtt/async_client.h>
 #include "sdk/scssdk_value.h"
 #include "sdk/scssdk_telemetry_event.h"
+#include "logger/logger.h"
 
 #include "config.h"
 #include "telemetry.h"
-#include "logger/logger.h"
+#include "sdk_mqtt_interop.h"
 #include "topics.h"
-#include "client.h"
 
 using json = nlohmann::json;
 

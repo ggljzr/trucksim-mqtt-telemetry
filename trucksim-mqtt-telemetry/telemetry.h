@@ -11,7 +11,6 @@
 #include "sdk/scssdk_telemetry_event.h"
 
 #include "logger/logger.h"
-#include "topics.h"
 
 using json = nlohmann::json;
 

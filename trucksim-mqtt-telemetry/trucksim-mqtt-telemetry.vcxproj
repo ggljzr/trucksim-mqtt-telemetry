@@ -183,6 +183,7 @@ xcopy.exe /y $(OutDir)paho-mqttpp3.dll "C:\Program Files (x86)\Steam\steamapps\c
     <ClInclude Include="sdk\scssdk_telemetry_channel.h" />
     <ClInclude Include="sdk\scssdk_telemetry_event.h" />
     <ClInclude Include="sdk\scssdk_value.h" />
+    <ClInclude Include="sdk_mqtt_interop.h" />
     <ClInclude Include="telemetry.h" />
     <ClInclude Include="topics.h" />
   </ItemGroup>
@@ -194,6 +195,7 @@ xcopy.exe /y $(OutDir)paho-mqttpp3.dll "C:\Program Files (x86)\Steam\steamapps\c
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../pch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="sdk_mqtt_interop.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
