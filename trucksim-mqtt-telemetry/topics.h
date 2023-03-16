@@ -14,6 +14,9 @@ namespace trucksim_mqtt {
 
 	// Event topics
 
+	// Note that sometimes the event topics will publish null message
+	// e. g. when the game menu is loaded, I guess to indicate clearing the configuration.
+
 	// Gameplay event topic prefix, used to config events to topics.
 	// note the trailing slash
 	constexpr auto kEventsGameplayTopicPrefix{ "trucksim/event/gameplay/" };
