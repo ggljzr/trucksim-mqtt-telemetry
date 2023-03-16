@@ -32,6 +32,8 @@
 #include "telemetry.h"
 
 namespace trucksim_mqtt {
+	constexpr auto dll_version = "v0.1.0";
+
 	mqtt::async_client mqtt_client(kServerAddress, kClientId);
 	MqttLogger logger(&mqtt_client);
 	Telemetry telemetry(&mqtt_client, &logger);
@@ -63,6 +65,9 @@ namespace trucksim_mqtt {
 			return result;
 		}
 
+		std::string ver_message("trucksim-mqtt-telemetry DLL version: ");
+		ver_message.append(dll_version);
+		logger.info(ver_message.c_str());
 		logger.info("Handlers successfully registered.");
 
 		return SCS_RESULT_ok;
