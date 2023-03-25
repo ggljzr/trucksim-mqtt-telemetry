@@ -12,10 +12,14 @@ following configuration:
 
 ```
 # default MQTT port listener
-listener 1883
+listener 1883 0.0.0.0
 # websockets listener
-listener 8080
+listener 8080 0.0.0.0
+
+# see https://github.com/eclipse/mosquitto/issues/2628
+socket_domain ipv4 
 protocol websockets
+
 # since we define additional listeners
 # we must explicitly allow annonymous connections
 # if your broker is publicly accessible, you should
@@ -25,3 +29,5 @@ allow_anonymous true
 
 On Windows, the default config location is ``C:\Program Files\mosquitto\mosquitto.conf``. After adding this configuration,
 restart the broker service.
+
+Make sure that Mosquitto broker EXE is allowed on Windows firewall, otherwise you will not be able to connect to it from other machines in LAN.
