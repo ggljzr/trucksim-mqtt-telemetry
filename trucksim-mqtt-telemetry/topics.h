@@ -50,6 +50,8 @@ namespace trucksim_mqtt {
 
 	// Game time channel
 	// "trucksim/channel/game/time"
+	// Next rest stop channel
+	// "trucksim/channel/rest/stop"
 
 	// Truck channels
 
