@@ -48,6 +48,9 @@ namespace trucksim_mqtt {
 	// note the trailing slash
 	constexpr auto kChannelTopicPrefix{ "trucksim/channel/" };
 
+	// Game time channel
+	// "trucksim/channel/game/time"
+
 	// Truck channels
 
 	constexpr auto kTruckWorldPlacementTopic{ "trucksim/channel/truck/world/placement" }; // registered, time limited

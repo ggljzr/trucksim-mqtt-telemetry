@@ -61,6 +61,12 @@ namespace trucksim_mqtt {
 			telemetry->publish_val(value->value_float.value, channel_to_topic(name).c_str());
 		}
 
+		SCSAPI_VOID on_u32_val(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
+		{
+			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
+			telemetry->publish_val(value->value_u32.value, channel_to_topic(name).c_str());
+		}
+
 		SCSAPI_VOID on_s32_val(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
 		{
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
@@ -98,6 +104,10 @@ namespace trucksim_mqtt {
 			// (SCS_RESULT_unsupported_type). For purpose of this example we ignore the failues
 			// so the unsupported channels will remain at theirs default value.
 
+			// Game time
+			version_params->register_for_channel(SCS_TELEMETRY_CHANNEL_game_time, SCS_U32_NIL, SCS_VALUE_TYPE_u32, SCS_TELEMETRY_CHANNEL_FLAG_none, on_u32_val, telemetry);
+
+			// Truck channels
 			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_world_placement, SCS_U32_NIL, SCS_VALUE_TYPE_euler, SCS_TELEMETRY_CHANNEL_FLAG_none, on_world_placement, telemetry);
 			//version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_speed, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_bool_val, telemetry);
 	
