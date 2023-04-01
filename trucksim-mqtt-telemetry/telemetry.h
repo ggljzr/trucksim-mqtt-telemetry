@@ -77,5 +77,10 @@ namespace trucksim_mqtt {
 		/// since the last published world placement update.
 		/// </summary>
 		void on_world_placement(const scs_value_dplacement_t* const dplacement_val);
+
+		/// <summary>
+		/// Method called when the plugin is deinitialized.
+		/// </summary>
+		void on_goodbye();
 	};
 }

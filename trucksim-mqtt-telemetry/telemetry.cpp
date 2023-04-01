@@ -137,4 +137,8 @@ namespace trucksim_mqtt {
 		publish(&data, kTruckWorldPlacementTopic);
 		last_world_placement_update = now;
 	}
+
+	void Telemetry::on_goodbye() {
+		logger->info("Goodbye");
+	}
 }

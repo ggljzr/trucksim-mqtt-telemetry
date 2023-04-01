@@ -78,8 +78,9 @@ namespace trucksim_mqtt {
 	/// </summary>
 	SCSAPI_VOID scs_telemetry_shutdown(void)
 	{
-		logger.info("Goodbye...");
-		mqtt_client.disconnect();
+		telemetry.on_goodbye();
+		auto token = mqtt_client.disconnect();
+		token->wait_for(3000L);
 	}
 
 #ifdef _WIN32
