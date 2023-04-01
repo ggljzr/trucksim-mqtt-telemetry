@@ -12,6 +12,8 @@ namespace trucksim_mqtt {
 	/// </summary>
 	constexpr auto kLogTopic{ "trucksim/log" };
 
+	constexpr auto kGameInfoTopic{ "trucksim/gameinfo" };
+
 	// Event topics
 
 	// Note that sometimes the event topics will publish null message

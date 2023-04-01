@@ -50,6 +50,7 @@ namespace trucksim_mqtt {
 
 	void Telemetry::version_check(const scs_telemetry_init_params_v101_t* const version_params) const
 	{
+		json gameInfo;
 		logger->info("Checking game version...");
 		// Check application version. Note that this example uses fairly basic channels which are likely to be supported
 		// by any future SCS trucking game however more advanced application might want to at least warn the user if there
@@ -87,6 +88,11 @@ namespace trucksim_mqtt {
 		else {
 			logger->warning("Unsupported game, some features or values might behave incorrectly");
 		}
+
+		gameInfo["game_id"] = version_params->common.game_id;
+		gameInfo["game_version"] = version_params->common.game_version;
+
+		publish(&gameInfo, kGameInfoTopic);
 	}
 
 	void Telemetry::on_frame_start(const scs_event_t event, const scs_telemetry_frame_start_t* const event_info) const {
