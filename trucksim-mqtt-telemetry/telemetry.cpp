@@ -152,5 +152,6 @@ namespace trucksim_mqtt {
 
 	void Telemetry::on_goodbye() {
 		logger->info("Goodbye");
+		publish("null", kGameInfoTopic);
 	}
 }

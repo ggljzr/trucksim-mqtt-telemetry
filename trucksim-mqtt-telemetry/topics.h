@@ -12,6 +12,12 @@ namespace trucksim_mqtt {
 	/// </summary>
 	constexpr auto kLogTopic{ "trucksim/log" };
 
+	/// <summary>
+	/// Topic used to publish current game info (game ID and version) when the plugin is loaded.
+	/// 
+	/// When the plugin is unloaded in scs_telemetry_shutdown, the 'null' string is published to this
+	/// topic, indicating that the game was exited.
+	/// </summary>
 	constexpr auto kGameInfoTopic{ "trucksim/gameinfo" };
 
 	// Event topics
