@@ -5,6 +5,7 @@
 #include <nlohmann/json.hpp>
 
 #include <mqtt/async_client.h>
+#include <mqtt/types.h>
 
 #include "sdk/scssdk_telemetry.h"
 #include "sdk/scssdk_value.h"
@@ -38,6 +39,11 @@ namespace trucksim_mqtt {
 		/// Returns true if the game is currently paused. Tracked by on_pause event handler.
 		/// </summary>
 		bool is_paused() const { return paused; };
+
+		/// <summary>
+		/// Basic publish method.
+		/// </summary>
+		void publish(mqtt::binary_ref payload, const char* topic) const;
 
 		/// <summary>
 		/// Published given JSON data to given topic. This method
