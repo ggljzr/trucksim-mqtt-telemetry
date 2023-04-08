@@ -32,7 +32,7 @@
 #include "telemetry.h"
 
 namespace trucksim_mqtt {
-	constexpr auto dll_version = "v0.1.0pre";
+	constexpr auto dll_version = "v0.1.0";
 
 	mqtt::async_client mqtt_client(kServerAddress, kClientId);
 	MqttLogger logger(&mqtt_client);
