@@ -1,7 +1,5 @@
 # trucksim-mqtt-telemetry
 
-*Work in progress*
-
 ATS/ETS2 plugin for publishing game telemetry via MQTT protocol.
 
 ## Performance
@@ -54,8 +52,18 @@ If you dont intend to use ATS for plugin developement, you should modify or remo
 
 Both debug and release configurations also define ``NOMINMAX`` flag for preprocessor. This is due to a [bug](https://github.com/eclipse/paho.mqtt.cpp/issues/226) in Paho MQTT library on Windows.
 
+## Installation
+
+You can find information on how to install precompiled plugin in the [latest release](https://github.com/ggljzr/trucksim-mqtt-telemetry/releases/latest).
+
+## Examples
+
+You can find basic examples on how to use MQTT API from Python or Javascript in the ``examples`` folder. For more complex stuff you can check:
+
+* [trucksim-dashboard](https://github.com/ggljzr/trucksim-dashboard) -- Dashboard for displaying map location, job information, navigation time and distance, and time to next rest stop. This was the primary reason I made this plugin. Dashboard is written in React and can be used as a basic template on how to make similar applications.
+
 ## Links
 
-* [RenCloud](https://github.com/RenCloud/scs-sdk-plugin) -- performance friendly plugin with more complete API that uses in memory files for communication,
+* [RenCloud](https://github.com/RenCloud/scs-sdk-plugin) -- plugin with more complete API that uses in memory files for communication,
 * [Route advisor app](https://github.com/mike-koch/ets2-mobile-route-advisor),
 * [ATS/ETS2 map tiles](https://github.com/Unicor-p/SCS_Map_Tiles).
