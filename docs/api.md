@@ -171,7 +171,7 @@ These are currently implemented value channels:
 
 * ``trucksim/channel/game/time`` - current ingame time. This is a number of minutes since the game starting point, which is on Monday, 00:00 - ``number``.
 * ``trucksim/channel/rest/stop`` - minutes to the next rest stop - ``number``.
-* ``trucksim/channel/truck/cruise_control`` - current cruise controll settings, 0 if disabled - ``number``.
+* ``trucksim/channel/truck/cruise_control`` - current cruise controll settings in m/s, 0 if disabled - ``number``.
 * ``trucksim/channel/truck/engine/gear`` - current transmission gear, 0 for neutral, negative for reverse gears - ``number``.
 * ``trucksim/channel/truck/fuel/amount`` - current fuel amount in liters - ``number``.
 * ``trucksim/channel/truck/fuel/range`` - estimated range with current fuel in km - ``number``.
