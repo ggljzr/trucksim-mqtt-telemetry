@@ -64,7 +64,7 @@ You can find basic examples on how to use MQTT API from Python or Javascript in 
 
 ## Documentation
 
-You can find basic topic API description in the [docs]('docs/api.md').
+You can find basic topic API description in the [docs](docs/api.md).
 
 ## Links
 
