@@ -38,8 +38,7 @@ If the game is exited, ``'null'`` string message is sent to this topic.
 
 ```javascript
 {
-	// "ats" or "eut2"
-    game_id: string,
+    game_id: string, 	// "ats" or "eut2"
     game_version: number,
 }
 ```
