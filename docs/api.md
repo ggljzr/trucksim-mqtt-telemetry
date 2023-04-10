@@ -1,7 +1,10 @@
 # MQTT API
 
 This documents describes topics currently implemented by the plugin. Note that the structure of topics and
-format of responses tries to copy the original SDK API.
+format of responses tries to copy the original SCS SDK API.
+
+For additional information about values published by each topic you can consult the SCS SDK API documentation directly, in the header files contained in
+``trucksim-mqtt-telemetry/trucksim-mqtt-telemetry/sdk/common`` folder.
 
 ## Utility topics
 

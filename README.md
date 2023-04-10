@@ -62,6 +62,10 @@ You can find basic examples on how to use MQTT API from Python or Javascript in 
 
 * [trucksim-dashboard](https://github.com/ggljzr/trucksim-dashboard) -- Dashboard for displaying map location, job information, navigation time and distance, and time to next rest stop. This was the primary reason I made this plugin. Dashboard is written in React and can be used as a basic template on how to make similar applications.
 
+## Documentation
+
+You can find basic topic API description in the [docs]('docs/api.md').
+
 ## Links
 
 * [RenCloud](https://github.com/RenCloud/scs-sdk-plugin) -- plugin with more complete API that uses in memory files for communication,
