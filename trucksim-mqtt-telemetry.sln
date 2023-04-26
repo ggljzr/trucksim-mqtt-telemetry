@@ -39,6 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{0515CAC2-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{5517AEC8-617D-43E3-868F-25DCA978CF7B}"
 	ProjectSection(SolutionItems) = preProject
+		tools\README.md = tools\README.md
 		tools\requirements.txt = tools\requirements.txt
 		tools\simulator.py = tools\simulator.py
 	EndProjectSection
