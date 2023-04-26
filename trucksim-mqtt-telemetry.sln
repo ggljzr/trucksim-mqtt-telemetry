@@ -37,6 +37,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{0515CAC2-C
 		docs\api.md = docs\api.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{5517AEC8-617D-43E3-868F-25DCA978CF7B}"
+	ProjectSection(SolutionItems) = preProject
+		tools\requirements.txt = tools\requirements.txt
+		tools\simulator.py = tools\simulator.py
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -71,6 +77,7 @@ Global
 		{E68B8318-9ECE-418A-879A-59C56A9E9526} = {494389E8-5A24-4256-BE81-A7E266FAB150}
 		{FFEF53F9-3BCE-4373-BF58-0819E4338307} = {96DCC234-FA47-412F-B152-D4B777692629}
 		{0515CAC2-C15D-427F-B75B-6E8B3A32D73F} = {96DCC234-FA47-412F-B152-D4B777692629}
+		{5517AEC8-617D-43E3-868F-25DCA978CF7B} = {96DCC234-FA47-412F-B152-D4B777692629}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BAAC84EF-EB23-4CF0-8E9D-AB7219574EC3}
