@@ -123,7 +123,7 @@ class Simulator:
         dpg.setup_dearpygui()
 
         with dpg.window(
-            label="Presets",
+            label=f"Broker: {self.host}:{self.port}",
             width=width,
             height=height * 0.3,
             no_resize=True,
