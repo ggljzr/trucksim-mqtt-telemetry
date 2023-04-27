@@ -173,6 +173,32 @@ class Simulator:
                 "trucksim/channel/rest/stop",
             )
 
+            dpg.add_separator()
+
+            make_channel_control(
+                "Cruise control [m/s]",
+                "trucksim/channel/truck/cruise_control",
+            )
+
+            make_channel_control(
+                "Gear",
+                "trucksim/channel/truck/engine/gear",
+            )
+
+            dpg.add_separator()
+
+            make_channel_control(
+                "Fuel [liters]",
+                "trucksim/channel/truck/fuel/amount",
+            )
+
+            make_channel_control(
+                "Fuel range [km]",
+                "trucksim/channel/truck/fuel/range",
+            )
+
+            dpg.add_separator()
+
             make_channel_control(
                 "Navigation time [seconds]",
                 "trucksim/channel/truck/navigation/time",
@@ -181,6 +207,11 @@ class Simulator:
             make_channel_control(
                 "Navigation distance [meters]",
                 "trucksim/channel/truck/navigation/distance",
+            )
+
+            make_channel_control(
+                "Navigation speed limit [m/s]",
+                "trucksim/channel/truck/navigation/speed/limit",
             )
 
         dpg.show_viewport()
