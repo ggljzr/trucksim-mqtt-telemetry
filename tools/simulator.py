@@ -113,6 +113,12 @@ class Simulator:
     def start(self):
         self.client.connect(self.host, self.port, 60)
 
+        # start client loop in a separate thread
+        # to maintain keepalive messages even when user
+        # is not publishing anything
+        # see https://www.emqx.com/en/blog/mqtt-keep-alive
+        self.client.loop_start()
+
         dpg.create_context()
         dpg.create_viewport(
             title="Simulator",
