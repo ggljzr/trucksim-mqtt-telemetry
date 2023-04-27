@@ -148,6 +148,7 @@ class Simulator:
                 input_id = dpg.add_input_int(label=label, width=width * 0.3)
                 dpg.add_button(
                     label="Set",
+                    indent=width * 0.85,
                     callback=lambda: self.publish_channel_value(
                         topic, dpg.get_value(input_id)
                     ),
