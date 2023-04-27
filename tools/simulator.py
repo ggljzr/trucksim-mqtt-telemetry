@@ -3,12 +3,14 @@ Simulator for simulating MQTT API. It publishes messages with the same format to
 as the MQTT telemetry plugin.
 """
 
+from typing import Any
+
 import dearpygui.dearpygui as dpg
 import json
 import paho.mqtt.client as mqtt
 
-height = 200
-width = 300
+height = 400
+width = 400
 
 
 class Simulator:
@@ -105,22 +107,25 @@ class Simulator:
     def unset_truck(self):
         self.publish("trucksim/event/config/truck", None)
 
+    def publish_channel_value(self, topic: str, value: Any):
+        self.publish(topic, {"value": value})
+
     def start(self):
         self.client.connect(self.host, self.port, 60)
 
         dpg.create_context()
         dpg.create_viewport(
             title="Simulator",
-            width=int(width * 1.1),
+            width=int(width),
             height=int(height * 1.1),
             resizable=False,
         )
         dpg.setup_dearpygui()
 
         with dpg.window(
-            label="Main",
+            label="Presets",
             width=width,
-            height=height,
+            height=height * 0.3,
             no_resize=True,
             no_move=True,
             no_close=True,
@@ -137,6 +142,45 @@ class Simulator:
             with dpg.group(horizontal=True):
                 dpg.add_button(label="Set Truck", callback=self.set_truck)
                 dpg.add_button(label="Unset Truck", callback=self.unset_truck)
+
+        def make_channel_control(label, topic):
+            with dpg.group(horizontal=True):
+                input_id = dpg.add_input_int(label=label, width=width * 0.3)
+                dpg.add_button(
+                    label="Set",
+                    callback=lambda: self.publish_channel_value(
+                        topic, dpg.get_value(input_id)
+                    ),
+                )
+
+        with dpg.window(
+            label="Channels",
+            width=width,
+            height=height * 0.7,
+            pos=[0, height * 0.3],
+            no_resize=True,
+            no_move=True,
+            no_close=True,
+        ):
+            make_channel_control(
+                "Game time [minutres]",
+                "trucksim/channel/game/time",
+            )
+
+            make_channel_control(
+                "Next rest stop [minutes]",
+                "trucksim/channel/rest/stop",
+            )
+
+            make_channel_control(
+                "Navigation time [seconds]",
+                "trucksim/channel/truck/navigation/time",
+            )
+
+            make_channel_control(
+                "Navigation distance [meters]",
+                "trucksim/channel/truck/navigation/distance",
+            )
 
         dpg.show_viewport()
         dpg.start_dearpygui()
