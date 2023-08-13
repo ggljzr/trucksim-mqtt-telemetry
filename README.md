@@ -61,6 +61,7 @@ You can find information on how to install precompiled plugin in the [latest rel
 You can find basic examples on how to use MQTT API from Python or Javascript in the ``examples`` folder. For more complex stuff you can check:
 
 * [trucksim-dashboard](https://github.com/ggljzr/trucksim-dashboard) -- Dashboard for displaying map location, job information, navigation time and distance, and time to next rest stop. This was the primary reason I made this plugin. Dashboard is written in React and can be used as a basic template on how to make similar applications.
+* [trucksim-clock](https://github.com/ggljzr/trucksim-clock) -- Gadget for displaying current time, ETA, and time to rest stop. Based on ESP32.
 
 ## Documentation
 
