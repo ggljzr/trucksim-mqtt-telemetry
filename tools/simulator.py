@@ -170,7 +170,7 @@ class Simulator:
             no_close=True,
         ):
             make_channel_control(
-                "Game time [minutres]",
+                "Game time [minutes]",
                 "trucksim/channel/game/time",
             )
 
