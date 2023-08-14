@@ -182,3 +182,26 @@ These are currently implemented value channels:
 * ``trucksim/channel/truck/navigation/distance`` - navigation distance (the distance to the navigation point set via world map or current job destination) in meters - ``number``.
 * ``trucksim/channel/truck/navigation/time`` - navigation ETA (see navigation distance above) in seconds.
 * ``trucksim/channel/truck/navigation/speed/limit`` - current speed limit, as displayed in the ingame navigation, in m/s - ``number``.
+
+### Working with time values
+
+This is a brief explanation on how to work with time values (game time, navigation ETA, rest stop time) recieved from the API:
+
+Game time (``trucksim/channel/game/time``) is an absolute point in time, counted from the begining of the game (Monday of the first weeek, 00:00). The value is given in minutes and can be recalculated into into weekday, hours and minutes with this formula:
+
+```python
+
+# current game time
+minutes = 136 # value from trucksim/channel/game/time
+
+# in python // is integer divison (i. e. without remainder)
+
+# weekday number, monday is 0
+weekday_num = (minutes // (60 * 24)) % 7;
+hours = (minutes // 60) % 24;
+minutes = (minutes % 60);
+```
+
+Rest stop time ``trucksim/channel/rest/stop`` represents *amount of time* (in minutes) from now until the next rest stop. So if you want to calculate ingame date of the next rest stop (e. g. Tuesday 13:34), you need to add value from this channel to the current game time from ``trucksim/channel/game/time``. After that you can calculate rest stop date with the formula mentioned above.
+
+Navigation ETA (``trucksim/channel/truck/navigation/time``) works exactly the same way, difference is that the value is in seconds. This is to mirror original SCS SDK.
