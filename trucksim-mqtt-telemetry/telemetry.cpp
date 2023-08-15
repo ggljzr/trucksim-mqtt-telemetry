@@ -44,7 +44,7 @@ namespace trucksim_mqtt {
 		publish(&data, topic);
 	}
 
-	// These define types thath publis_val can actually be called with.
+	// These define types that publish_val can be called with.
 	// See https://isocpp.org/wiki/faq/templates#separate-template-fn-defn-from-decl
 
 	template void Telemetry::publish_val<scs_float_t>(const scs_float_t value, const char* topic) const;
