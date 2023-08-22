@@ -150,6 +150,18 @@ namespace trucksim_mqtt {
 		last_world_placement_update = now;
 	}
 
+	void Telemetry::on_navigation_distance(const scs_value_float_t* const distance) {
+		auto now = std::chrono::high_resolution_clock::now();
+		auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(now - last_navigation_distance_update);
+
+		if (delta < kNavigationDistanceUpdatePeriod) {
+			return;
+		}
+
+		publish_val(distance->value, kTruckNavigationDistanceTopic);
+		last_navigation_distance_update = now;
+	}
+
 	void Telemetry::on_goodbye() {
 		logger->info("Goodbye");
 		publish("null", kGameInfoTopic);

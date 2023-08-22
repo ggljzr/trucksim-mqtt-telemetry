@@ -25,6 +25,8 @@ namespace trucksim_mqtt {
 		Logger* logger;
 
 		std::chrono::steady_clock::time_point last_world_placement_update{};
+		std::chrono::steady_clock::time_point last_navigation_distance_update{};
+
 		bool paused{ false };
 	public:
 		Telemetry(mqtt::async_client* client, Logger* logger);
@@ -83,6 +85,13 @@ namespace trucksim_mqtt {
 		/// since the last published world placement update.
 		/// </summary>
 		void on_world_placement(const scs_value_dplacement_t* const dplacement_val);
+
+		/// <summary>
+		/// Method for publishing information about navigation distance.
+		/// This is also rate limited, see on_world_placement.
+		/// </summary>
+		/// <param name="distance"></param>
+		void on_navigation_distance(const scs_value_float_t* const distance);
 
 		/// <summary>
 		/// Method called when the plugin is deinitialized.

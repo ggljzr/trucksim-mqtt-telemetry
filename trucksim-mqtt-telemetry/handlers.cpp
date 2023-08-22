@@ -55,6 +55,12 @@ namespace trucksim_mqtt {
 			telemetry->on_world_placement(&value->value_dplacement);
 		}
 
+		SCSAPI_VOID on_navigation_distance(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
+		{
+			Telemetry* telemetry = static_cast<Telemetry*>(context);
+			telemetry->on_navigation_distance(&value->value_float);
+		}
+
 		SCSAPI_VOID on_float_val(const scs_string_t name, const scs_u32_t index, const scs_value_t* const value, const scs_context_t context)
 		{
 			const Telemetry* telemetry = static_cast<const Telemetry*>(context);
@@ -123,7 +129,7 @@ namespace trucksim_mqtt {
 			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_fuel_range, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_float_val, telemetry);
 			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_fuel_warning, SCS_U32_NIL, SCS_VALUE_TYPE_bool, SCS_TELEMETRY_CHANNEL_FLAG_none, on_bool_val, telemetry);
 
-			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_navigation_distance, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_float_val, telemetry);
+			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_navigation_distance, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_navigation_distance, telemetry);
 			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_navigation_time, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_float_val, telemetry);
 			version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_navigation_speed_limit, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, on_float_val, telemetry);
 
