@@ -17,6 +17,11 @@ namespace trucksim_mqtt {
 		conn_opts.set_keep_alive_interval(20);
 		conn_opts.set_clean_session(true);
 
+		if (game_log != NULL) {
+			game_log(SCS_LOG_TYPE_message, "Connecting to MQTT server...");
+			game_log(SCS_LOG_TYPE_message, client->get_server_uri().c_str());
+		}
+
 		try {
 			auto token = client->connect(conn_opts);
 			// blocking wait for client to connect
@@ -30,6 +35,10 @@ namespace trucksim_mqtt {
 			}
 
 			return SCS_RESULT_generic_error;
+		}
+
+		if (game_log != NULL) {
+			game_log(SCS_LOG_TYPE_message, "Connection successful");
 		}
 
 		return SCS_RESULT_ok;
