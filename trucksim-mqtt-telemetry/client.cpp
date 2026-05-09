@@ -24,14 +24,20 @@ namespace trucksim_mqtt {
 
 		try {
 			auto token = client->connect(conn_opts);
-			// blocking wait for client to connect
-			token->wait_for(timeout);
+			// Blocking wait for client to connect.
+			const bool completed = token->wait_for(timeout);
+			if (!completed || !client->is_connected()) {
+				if (game_log != NULL) {
+					game_log(SCS_LOG_TYPE_warning, "MQTT connection timeout or broker unreachable");
+				}
+				return SCS_RESULT_generic_error;
+			}
 		}
 		catch (const mqtt::exception& exc) {
 
 			if (game_log != NULL) {
-				game_log(SCS_LOG_TYPE_message, "MQTT Connection error");
-				game_log(SCS_LOG_TYPE_message, exc.what());
+				game_log(SCS_LOG_TYPE_warning, "MQTT Connection error");
+				game_log(SCS_LOG_TYPE_warning, exc.what());
 			}
 
 			return SCS_RESULT_generic_error;
