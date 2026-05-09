@@ -33,7 +33,7 @@
 #include "telemetry.h"
 
 namespace trucksim_mqtt {
-	constexpr auto dll_version = "v0.1.0";
+	constexpr auto dll_version = "v0.2.0";
 
 	std::unique_ptr<mqtt::async_client> mqtt_client;
 	std::unique_ptr<MqttLogger> logger;
