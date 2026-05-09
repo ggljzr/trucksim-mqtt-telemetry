@@ -25,6 +25,16 @@ as the game itself, to minimize the latency. Other clients (subscribers) can con
 For now, the connection to the broker is hardcoded (defined in ``config.h``) and defaults to ``tcp://127.0.0.1:1883``. To change this
 you need to recompile the plugin. I will hopefully add option to load configuration from a file some time soon.
 
+MQTT broker address defaults to ``tcp://127.0.0.1:1883``. It can be reconfigured in ``mqtt-config.json`` file:
+
+```json
+{
+   "server_address": "tcp://127.0.0.1:1883"
+}
+```
+
+The JSON file has to be placed in the game directory, next to the game .EXE.
+
 ## Requirements
 
 * Eclipse Paho MQTT [library](https://github.com/eclipse/paho.mqtt.cpp), 

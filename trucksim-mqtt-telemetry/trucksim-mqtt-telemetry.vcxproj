@@ -189,6 +189,7 @@ xcopy.exe /y $(OutDir)paho-mqttpp3.dll "C:\Program Files (x86)\Steam\steamapps\c
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="client.cpp" />
+    <ClCompile Include="config.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="handlers.cpp" />
     <ClCompile Include="logger\mqtt_logger.cpp">
